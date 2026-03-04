@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
-const SUPABASE_URL = "https://czplcdhhzehxqfbxkito.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6cGxjZGhoemVoeHFmYnhraXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2MjU2MDgsImV4cCI6MjA4ODIwMTYwOH0.hzXDcccXtj4UuI8JZRQQR03xhgyjOvSJlFBm348JYAM";
-const TEAM_PASSWORD = "torchers2026filik";
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+const TEAM_PASSWORD = "torchers2026";
 
 const LOGO_DATA_URI = "data:image/jpeg;base64,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";
 
@@ -67,7 +67,7 @@ const PERF_SCORE  = { Perfect:5, Good:4, Average:3, Poor:1, NG:0 };
 const SCORE_SCORE = { Excellent:5, Good:4, Average:3, Poor:1, None:0 };
 const CLIMB_SCORE = { High:3, Mid:2, Low:1, None:0 };
 function totalPitScore(r) {
-  return (PERF_SCORE[r.performance]||0)*2 + (SCORE_SCORE[r.scoring]||0)*2 + (CLIMB_SCORE[r.climb]||0);
+  return (PERF_SCORE[r.performance]||0)*2 + (SCORE_SCORE[r.scoring]||0)*2 + (CLIMB_SCORE[r.climb]||0)
 }
 
 function makeApi(url, key) {
@@ -771,18 +771,37 @@ function Rankings({ api, refreshKey }) {
   const [data, setData] = useState([]);
   const [matchData, setMatchData] = useState([]);
   const [view, setView] = useState("pit");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    api("/scouting?select=*").then(r=>r.json()).then(d=>setData(d||[])).catch(()=>{});
-    api("/match_scouting?select=*").then(r=>r.json()).then(d=>setMatchData(d||[])).catch(()=>{});
-  }, [refreshKey, api]);
+    if (!api) return;
+    setError(null);
+    Promise.all([
+      api("/scouting?select=*").then(r=>r.json()).catch(()=>[]),
+      api("/match_scouting?select=*").then(r=>r.json()).catch(()=>[]),
+    ]).then(([pit, match]) => {
+      setData(Array.isArray(pit) ? pit : []);
+      setMatchData(Array.isArray(match) ? match : []);
+    }).catch(e => setError(String(e)));
+  }, [refreshKey]);
 
-  const pitRanked = data.map(r=>{
-    const t = TEAMS.find(x=>x.team===r.team_number)||{};
-    return { ...r, team_name: r.team_name||t.name||`Team ${r.team_number}`, pit: t.pit, score: totalPitScore(r) };
-  }).sort((a,b)=>b.score-a.score);
+  if (error) return (
+    <div className="nodata">
+      <p style={{fontSize:16,marginBottom:6,color:"#f87171"}}>Hata oluştu</p>
+      <span style={{fontSize:13}}>{error}</span>
+    </div>
+  );
 
-  // Match rankings: avg score per team
+  const pitRanked = data.map(r => {
+    const t = TEAMS.find(x => x.team === r.team_number) || {};
+    return {
+      ...r,
+      team_name: r.team_name || t.name || `Team ${r.team_number}`,
+      pit: t.pit,
+      score: totalPitScore(r),
+    };
+  }).sort((a, b) => b.score - a.score);
+
   const teamMatchScores = {};
   matchData.forEach(r => {
     if (!r.team_number) return;
@@ -792,12 +811,12 @@ function Rankings({ api, refreshKey }) {
     teamMatchScores[r.team_number].count += 1;
   });
   const matchRanked = Object.entries(teamMatchScores).map(([tn, s]) => {
-    const t = TEAMS.find(x=>x.team===parseInt(tn))||{};
+    const t = TEAMS.find(x => x.team === parseInt(tn)) || {};
     return { team_number:parseInt(tn), team_name:t.name||`Team ${tn}`, pit:t.pit, avg:s.total/s.count, total:s.total, count:s.count };
-  }).sort((a,b)=>b.avg-a.avg);
+  }).sort((a, b) => b.avg - a.avg);
 
-  const ranked = view==="pit" ? pitRanked : matchRanked;
-  const max = view==="pit" ? (pitRanked[0]?.score||1) : (matchRanked[0]?.avg||1);
+  const ranked = view === "pit" ? pitRanked : matchRanked;
+  const max = view === "pit" ? (pitRanked[0]?.score || 1) : (matchRanked[0]?.avg || 1);
 
   return (
     <div>
@@ -809,21 +828,30 @@ function Rankings({ api, refreshKey }) {
           ))}
         </div>
       </div>
-      {ranked.length===0 ? (
-        <div className="nodata"><p style={{fontSize:16,marginBottom:6}}>Veri yok</p><span style={{fontSize:13}}>Önce scouting yap</span></div>
+      {ranked.length === 0 ? (
+        <div className="nodata">
+          <p style={{fontSize:16,marginBottom:6}}>Veri yok</p>
+          <span style={{fontSize:13}}>Önce scouting yap</span>
+        </div>
       ) : (
         <div className="rlist">
-          {ranked.map((r,i)=>{
+          {ranked.map((r, i) => {
             const g = i===0?"g1":i===1?"g2":i===2?"g3":"";
             const score = view==="pit" ? r.score : r.avg;
-            const scoreLabel = view==="pit" ? `${r.score}/16` : `${r.avg?.toFixed(1)} avg`;
+            const scoreLabel = view==="pit" ? `${r.score}/16` : `${(r.avg||0).toFixed(1)} avg`;
             return (
               <div key={r.team_number} className={`rcard ${g}`}>
                 <div className={`rpos ${g}`}>{i+1}</div>
                 <div className="rinfo">
                   <div className="rn">{r.team_name}</div>
-                  <div className="rm">#{r.team_number}{r.pit?` · Pit ${r.pit}`:""}{view==="match"?` · ${r.count} maç`:""}</div>
-                  {view==="pit" && <div className="rpills"><Pill label={r.performance}/><Pill label={r.scoring}/>{r.climb&&r.climb!=="None"&&<Pill label={`Climb: ${r.climb}`}/>}</div>}
+                  <div className="rm">#{r.team_number}{r.pit ? ` · Pit ${r.pit}` : ""}{view==="match" ? ` · ${r.count} maç` : ""}</div>
+                  {view==="pit" && (
+                    <div className="rpills">
+                      <Pill label={r.performance}/>
+                      <Pill label={r.scoring}/>
+                      {r.climb && r.climb!=="None" && <Pill label={`Climb: ${r.climb}`}/>}
+                    </div>
+                  )}
                 </div>
                 <div className="rbar">
                   <div className="btrack"><div className="bfill" style={{width:`${(score/max)*100}%`}}/></div>
@@ -844,7 +872,7 @@ export default function App() {
   const [authed, setAuthed] = useState(false);
   const [tab, setTab]       = useState("pit");
   const [rk, setRk]         = useState(0);
-  const api = useCallback(creds ? makeApi(creds.url, creds.key) : null, [creds]);
+  const api = creds ? makeApi(creds.url, creds.key) : null;
 
   if (!creds)  return <Setup onConnect={(url,key)=>setCreds({url,key})} />;
   if (!authed) return <><style>{CSS}</style><Login onLogin={()=>setAuthed(true)} /></>;
