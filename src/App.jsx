@@ -335,7 +335,23 @@ textarea.inp { min-height:80px; resize:vertical; margin-bottom:18px; font-size:1
 .lightbox-counter { position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
   font-family:'Share Tech Mono',monospace; font-size:13px; color:rgba(255,255,255,.6); }
 
-/* ── MATCH SCOUTING ── */
+/* ── PIT GRID ── */
+.pit-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:8px; margin-top:8px; }
+.pit-card { position:relative; padding:12px 10px; cursor:pointer; transition:all .18s; border:1px solid; }
+.pit-empty { background:#111; border-color:#222; }
+.pit-empty:hover { border-color:#444; background:#161616; }
+.pit-done { background:rgba(220,38,38,.1); border-color:rgba(220,38,38,.5); }
+.pit-done:hover { background:rgba(220,38,38,.18); border-color:#dc2626; }
+.pit-num { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
+.pit-empty .pit-num { color:#333; }
+.pit-done .pit-num { color:rgba(220,38,38,.7); }
+.pit-team { font-family:'Share Tech Mono',monospace; font-size:15px; font-weight:700; margin-bottom:2px; }
+.pit-empty .pit-team { color:#444; }
+.pit-done .pit-team { color:#fca5a5; }
+.pit-name { font-size:10px; line-height:1.3; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.pit-empty .pit-name { color:#333; }
+.pit-done .pit-name { color:#e2e8f0; }
+.pit-check { position:absolute; top:6px; right:8px; color:#dc2626; font-size:12px; font-weight:700; }
 .qual-nav { display:flex; align-items:center; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
 .qual-num-display {
   font-family:'Share Tech Mono',monospace; font-size:28px; font-weight:700;
@@ -601,29 +617,37 @@ function PhotoSection({ teamNumber, supabaseUrl, supabaseKey }) {
 
 // ── Pit Scout ─────────────────────────────────────────────────────────────
 function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
-  const [q, setQ] = useState("");
-  const [showDrop, setShowDrop] = useState(false);
   const [sel, setSel] = useState(null);
+  const [scoutedSet, setScoutedSet] = useState(new Set());
   const [form, setForm] = useState(BLANK_PIT);
   const [existingId, setExistingId] = useState(null);
   const [status, setStatus] = useState(null);
+  const [matchHistory, setMatchHistory] = useState([]);
 
-  const filtered = TEAMS.filter(t =>
-    t.name.toLowerCase().includes(q.toLowerCase()) || String(t.team).includes(q)
-  ).slice(0,12);
+  // Load all scouted team numbers for the grid
+  useEffect(() => {
+    api("/scouting?select=team_number").then(r=>r.json()).then(d=>{
+      if (Array.isArray(d)) setScoutedSet(new Set(d.map(x=>x.team_number)));
+    }).catch(()=>{});
+  }, [api]);
 
   async function pick(t) {
-    setSel(t); setQ(""); setShowDrop(false); setStatus(null);
+    setSel(t); setStatus(null);
     try {
-      const r = await api(`/scouting?team_number=eq.${t.team}&select=*`);
-      const d = await r.json();
-      if (d?.[0]) {
-        const s = d[0];
+      const [scoutRes, matchRes] = await Promise.all([
+        api(`/scouting?team_number=eq.${t.team}&select=*`),
+        api(`/match_scouting?team_number=eq.${t.team}&select=*&order=qual_number.asc`),
+      ]);
+      const sd = await scoutRes.json();
+      const md = await matchRes.json();
+      if (sd?.[0]) {
+        const s = sd[0];
         setForm({ performance:s.performance||"", scoring:s.scoring||"", shooter_type:s.shooter_type||"",
           intake_type:s.intake_type||"", climb:s.climb||"", capacity:s.capacity||"", notes:s.notes||"" });
         setExistingId(s.id);
       } else { setForm(BLANK_PIT); setExistingId(null); }
-    } catch { setForm(BLANK_PIT); setExistingId(null); }
+      setMatchHistory(Array.isArray(md) ? md : []);
+    } catch { setForm(BLANK_PIT); setExistingId(null); setMatchHistory([]); }
   }
 
   async function save() {
@@ -632,7 +656,9 @@ function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
     try {
       const r = await api(`/scouting?on_conflict=team_number`, { method:"POST", body:JSON.stringify(payload), prefer:"resolution=merge-duplicates,return=representation" });
       if (!r.ok) throw new Error();
-      setExistingId(true); setStatus("saved"); onSaved();
+      setExistingId(true); setStatus("saved");
+      setScoutedSet(prev => new Set([...prev, sel.team]));
+      onSaved();
     } catch { setStatus("error"); }
   }
 
@@ -642,64 +668,152 @@ function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
     try {
       const r = await api(`/scouting?team_number=eq.${sel.team}`, { method:"DELETE", prefer:"" });
       if (!r.ok) throw new Error();
-      setForm(BLANK_PIT); setExistingId(null); setStatus("cleared"); onSaved();
+      setForm(BLANK_PIT); setExistingId(null); setStatus("cleared");
+      setScoutedSet(prev => { const s = new Set(prev); s.delete(sel.team); return s; });
+      onSaved();
     } catch { setStatus("error"); }
   }
 
   const f = k => v => setForm(p=>({...p,[k]:v}));
 
+  // sorted by pit number
+  const sortedTeams = [...TEAMS].sort((a,b) => a.pit - b.pit);
+
+  if (!sel) {
+    // ── PIT GRID ──
+    const scouted = scoutedSet.size;
+    return (
+      <div>
+        <div className="ph">
+          <h2>Pit Scouting</h2>
+          <p>Bir pit seç — <span style={{color:"var(--acc)"}}>{scouted}</span> / {TEAMS.length} tamamlandı</p>
+        </div>
+        <div className="pit-grid">
+          {sortedTeams.map(t => {
+            const done = scoutedSet.has(t.team);
+            return (
+              <div key={t.team} className={`pit-card ${done?"pit-done":"pit-empty"}`} onClick={() => pick(t)}>
+                <div className="pit-num">PIT {t.pit}</div>
+                <div className="pit-team">#{t.team}</div>
+                <div className="pit-name">{t.name}</div>
+                {done && <div className="pit-check">✓</div>}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // ── TEAM PROFILE ──
+  const matchScore = matchHistory.reduce((sum,r) =>
+    sum + (parseFloat(r.auto_climb)||0) + (parseFloat(r.auto_score)||0) +
+          (parseFloat(r.teleop_score)||0) + (parseFloat(r.teleop_climb)||0), 0);
+  const avgMatchScore = matchHistory.length ? (matchScore / matchHistory.length).toFixed(1) : null;
+
   return (
     <div>
-      <div className="ph"><h2>Pit Scouting</h2><p>Takım arama ve pit scouting verisi girme</p></div>
-      {!sel ? (
-        <div className="tsearch">
-          <input value={q} onChange={e=>{setQ(e.target.value);setShowDrop(true)}} onFocus={()=>setShowDrop(true)} placeholder="Takım numarası veya ismiyle ara…" />
-          {showDrop && q && (
-            <div className="tdrop">
-              {filtered.length ? filtered.map(t=>(
-                <div key={t.team} className="topt" onClick={()=>pick(t)}>
-                  <span className="tbadge">#{t.team}</span><span className="tname">{t.name}</span><span className="tfrom">{t.from}</span>
-                </div>
-              )) : <div style={{padding:"10px 16px",color:"var(--muted)",fontSize:13}}>Bulunamadı</div>}
-            </div>
-          )}
+      {/* Header */}
+      <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:24}}>
+        <button onClick={()=>{setSel(null);setForm(BLANK_PIT);setStatus(null)}} style={{
+          padding:"8px 16px", background:"none", border:"1px solid var(--brd2)", color:"var(--muted)",
+          fontSize:12, fontWeight:600, letterSpacing:1, textTransform:"uppercase", cursor:"pointer", transition:"all .2s",
+        }}
+          onMouseEnter={e=>e.target.style.borderColor="#dc2626"}
+          onMouseLeave={e=>e.target.style.borderColor="var(--brd2)"}
+        >← Geri</button>
+        <div style={{flex:1}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:22,color:"var(--acc)"}}>#{sel.team}</span>
+            <span style={{fontFamily:"'Rajdhani',sans-serif",fontSize:24,fontWeight:700}}>{sel.name}</span>
+            {existingId && <span style={{fontSize:11,color:"var(--acc)",background:"rgba(220,38,38,.15)",padding:"2px 8px"}}>✓ SCOUTED</span>}
+          </div>
+          <div style={{fontSize:12,color:"var(--muted)",marginTop:2}}>Pit {sel.pit} · {sel.from}</div>
         </div>
-      ) : (
-        <div className="scard">
-          <div className="snum">#{sel.team}</div>
-          <div><div className="sname">{sel.name}</div><div className="smeta">Pit {sel.pit} · {sel.from}{existingId?" · Kayıtlı ✓":""}</div></div>
-          <button className="chg" onClick={()=>{setSel(null);setForm(BLANK_PIT);setStatus(null)}}>Değiştir</button>
+        {avgMatchScore && (
+          <div style={{textAlign:"right"}}>
+            <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:22,color:"var(--acc)"}}>{avgMatchScore}</div>
+            <div style={{fontSize:10,color:"var(--muted)",letterSpacing:1}}>MATCH AVG</div>
+          </div>
+        )}
+      </div>
+
+      {/* Pit Score summary if scouted */}
+      {existingId && (
+        <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:18}}>
+          {[["Performance",form.performance],["Scoring",form.scoring],["Climb",form.climb],
+            ["Shooter",form.shooter_type],["Intake",form.intake_type],["Capacity",form.capacity]
+          ].filter(([,v])=>v).map(([k,v])=>(
+            <div key={k} style={{background:"var(--surf)",border:"1px solid var(--brd2)",padding:"5px 12px"}}>
+              <div style={{fontSize:9,color:"var(--muted)",letterSpacing:1,textTransform:"uppercase"}}>{k}</div>
+              <div style={{fontSize:13,color:"var(--acc)",fontWeight:600,marginTop:2}}>{v}</div>
+            </div>
+          ))}
+          <div style={{background:"rgba(220,38,38,.1)",border:"1px solid var(--acc)",padding:"5px 14px"}}>
+            <div style={{fontSize:9,color:"var(--muted)",letterSpacing:1,textTransform:"uppercase"}}>PIT SCORE</div>
+            <div style={{fontSize:18,color:"var(--acc)",fontFamily:"'Share Tech Mono',monospace",fontWeight:700}}>{totalPitScore(form)}/16</div>
+          </div>
         </div>
       )}
-      {sel && (<>
-        <div className="fgrid">
-          {[["Performance","performance",PERF_OPTS],["Scoring","scoring",SCORE_OPTS],
-            ["Shooter Type","shooter_type",SHOOTER_OPTS],["Intake Type","intake_type",INTAKE_OPTS],
-            ["Climb","climb",CLIMB_OPTS],["Capacity","capacity",CAP_OPTS]].map(([lbl,key,opts])=>(
-            <div className="fg" key={key}><label>{lbl}</label><RadioGroup options={opts} value={form[key]} onChange={f(key)} /></div>
-          ))}
+
+      {/* Match history */}
+      {matchHistory.length > 0 && (
+        <div style={{marginBottom:24}}>
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:2,color:"var(--muted)",textTransform:"uppercase",marginBottom:10}}>
+            Match Geçmişi — {matchHistory.length} maç
+          </div>
+          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+            {matchHistory.map(m => {
+              const s = (parseFloat(m.auto_climb)||0)+(parseFloat(m.auto_score)||0)+(parseFloat(m.teleop_score)||0)+(parseFloat(m.teleop_climb)||0);
+              const allianceColor = m.alliance==="red" ? "#fca5a5" : "#93c5fd";
+              return (
+                <div key={m.id} style={{background:"var(--surf)",border:`1px solid ${m.alliance==="red"?"rgba(220,38,38,.3)":"rgba(37,99,235,.3)"}`,padding:"8px 12px",minWidth:80}}>
+                  <div style={{fontSize:10,color:allianceColor,fontWeight:700,letterSpacing:1}}>QUAL {m.qual_number}</div>
+                  <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:18,color:"var(--txt)",margin:"4px 0"}}>{s}</div>
+                  <div style={{fontSize:9,color:"var(--muted)"}}>
+                    {m.auto_score||0}+{m.auto_climb||0} / {m.teleop_score||0}+{m.teleop_climb||0}
+                  </div>
+                  {m.notes && <div style={{fontSize:10,color:"var(--muted)",marginTop:4,maxWidth:100,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}} title={m.notes}>{m.notes}</div>}
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <label className="lbl">Notes</label>
-        <textarea className="inp" value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} placeholder="Gözlemler, strateji notları…" />
-        <PhotoSection teamNumber={sel.team} supabaseUrl={supabaseUrl} supabaseKey={supabaseKey} />
-        <div className="srow">
-          <button className="btn-save" onClick={save} disabled={status==="saving"||status==="clearing"}>
-            {status==="saving"?"KAYDEDİLİYOR…":existingId?"GÜNCELLE":"KAYDET"}
-          </button>
-          <button onClick={clearData} disabled={status==="saving"||status==="clearing"} style={{
-            padding:"10px 16px",background:"none",border:"1px solid #2a2a2a",color:"#64748b",
-            fontSize:12,fontWeight:600,letterSpacing:1,textTransform:"uppercase",cursor:"pointer",transition:"all .2s"
-          }}
-            onMouseEnter={e=>{e.target.style.borderColor="#ef4444";e.target.style.color="#f87171"}}
-            onMouseLeave={e=>{e.target.style.borderColor="#2a2a2a";e.target.style.color="#64748b"}}
-          >
-            {status==="clearing"?"SİLİNİYOR…":"✕ TEMİZLE"}
-          </button>
-          {status==="saved"   && <span className="sok">✓ Kaydedildi!</span>}
-          {status==="cleared" && <span style={{fontSize:13,color:"#94a3b8"}}>✓ Temizlendi</span>}
-          {status==="error"   && <span className="serr">✗ Hata</span>}
-        </div>
-      </>)}
+      )}
+
+      {/* Photos */}
+      <PhotoSection teamNumber={sel.team} supabaseUrl={supabaseUrl} supabaseKey={supabaseKey} />
+
+      {/* Pit scout form */}
+      <div style={{fontSize:10,fontWeight:700,letterSpacing:2,color:"var(--muted)",textTransform:"uppercase",marginBottom:14,marginTop:8}}>
+        Pit Scout Formu
+      </div>
+      <div className="fgrid">
+        {[["Performance","performance",PERF_OPTS],["Scoring","scoring",SCORE_OPTS],
+          ["Shooter Type","shooter_type",SHOOTER_OPTS],["Intake Type","intake_type",INTAKE_OPTS],
+          ["Climb","climb",CLIMB_OPTS],["Capacity","capacity",CAP_OPTS]].map(([lbl,key,opts])=>(
+          <div className="fg" key={key}><label>{lbl}</label><RadioGroup options={opts} value={form[key]} onChange={f(key)} /></div>
+        ))}
+      </div>
+      <label className="lbl">Notes</label>
+      <textarea className="inp" value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} placeholder="Gözlemler, strateji notları…" />
+      <div className="srow">
+        <button className="btn-save" onClick={save} disabled={status==="saving"||status==="clearing"}>
+          {status==="saving"?"KAYDEDİLİYOR…":existingId?"GÜNCELLE":"KAYDET"}
+        </button>
+        <button onClick={clearData} disabled={status==="saving"||status==="clearing"} style={{
+          padding:"10px 16px",background:"none",border:"1px solid #2a2a2a",color:"#64748b",
+          fontSize:12,fontWeight:600,letterSpacing:1,textTransform:"uppercase",cursor:"pointer",transition:"all .2s"
+        }}
+          onMouseEnter={e=>{e.target.style.borderColor="#ef4444";e.target.style.color="#f87171"}}
+          onMouseLeave={e=>{e.target.style.borderColor="#2a2a2a";e.target.style.color="#64748b"}}
+        >
+          {status==="clearing"?"SİLİNİYOR…":"✕ TEMİZLE"}
+        </button>
+        {status==="saved"   && <span className="sok">✓ Kaydedildi!</span>}
+        {status==="cleared" && <span style={{fontSize:13,color:"#94a3b8"}}>✓ Temizlendi</span>}
+        {status==="error"   && <span className="serr">✗ Hata</span>}
+      </div>
     </div>
   );
 }
