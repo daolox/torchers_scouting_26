@@ -4,8 +4,6 @@ const SUPABASE_URL = "https://czplcdhhzehxqfbxkito.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6cGxjZGhoemVoeHFmYnhraXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2MjU2MDgsImV4cCI6MjA4ODIwMTYwOH0.hzXDcccXtj4UuI8JZRQQR03xhgyjOvSJlFBm348JYAM";
 const TEAM_PASSWORD = "torchers2026filik";
 
-const LOGO_DATA_URI = "data:image/jpeg;base64,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";
-
 const TEAMS = [
   { no:1,  pit:2,  team:4817,  name:"One Degree North",           from:"Singapore" },
   { no:2,  pit:31, team:4972,  name:"BORUSAN ROBOTICS",           from:"Türkiye" },
@@ -55,12 +53,12 @@ const TEAMS = [
 ];
 
 const TOTAL_QUALS = 80;
-const PERF_OPTS    = ["Perfect","Good","Average","Poor","DNQ"];
-const SCORE_OPTS   = ["Excellent","Good","Average","Poor","None"];
-const SHOOTER_OPTS = ["High Goal","Low Goal","Both","None"];
-const INTAKE_OPTS  = ["Ground","Human Player","Both","None"];
-const CLIMB_OPTS   = ["High","Mid","Low","None"];
-const CAP_OPTS     = ["High (5+)","Medium (3-4)","Low (1-2)","None"];
+const PERF_OPTS    = ["Perfect","Good","Average","Poor","NG"];
+const SCORE_OPTS   = ["While Moving","Fixed Place","Fixed Place with image processing","None"];
+const SHOOTER_OPTS = ["360 Turret","Bevel Turret","Kitbot","Fixed Shooter","None"];
+const INTAKE_OPTS  = ["Over Bumper","Under Bumper","Both","None"];
+const CLIMB_OPTS   = ["L1 Middle","L1 Side","L2 Middle","L2 Side","L3 Middle","L3 Side","None"];
+const CAP_OPTS     = ["Insane (30+)","High (21-30)","Medium (11-20)","Low (5-10)","None"];
 const BLANK_PIT = { performance:"", scoring:"", shooter_type:"", intake_type:"", climb:"", capacity:"", notes:"" };
 
 const PERF_SCORE  = { Perfect:5, Good:4, Average:3, Poor:1, DNQ:0 };
@@ -81,15 +79,36 @@ function makeApi(url, key) {
   };
 }
 
-function TorchersLogo({ size = 36 }) {
+function TorchersLogo({ size = 36, color = "#dc2626" }) {
+  const h = size;
+  const w = size * (499 / 732);
   return (
-    <img
-      src={LOGO_DATA_URI}
-      alt="Torchers Logo"
-      width={size}
-      height={size}
-      style={{ objectFit:"contain", filter:"invert(1) sepia(1) saturate(5) hue-rotate(320deg)" }}
-    />
+    <svg width={w} height={h} viewBox="0 0 499 732" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(0,732) scale(0.1,-0.1)" fill={color} stroke="none">
+        <path d="M2088 6603 c-139 -173 -223 -300 -297 -450 -210 -422 -223 -765 -46 -1202 83 -203 82 -223 -8 -223 -77 0 -161 58 -249 171 -28 36 -55 70 -60 75 -10 13 -80 -137 -122 -265 -133 -399 -88 -752 135 -1069 62 -88 206 -235 301 -306 l67 -51 -44 -37 c-25 -20 -75 -74 -113 -119 -163 -194 -239 -348 -249 -502 -5 -72 -3 -83 17 -107 17 -23 29 -28 65 -28 50 0 141 31 180 61 31 25 108 137 156 229 49 92 117 156 224 209 89 44 334 135 342 127 2 -2 -7 -77 -21 -167 -38 -247 -73 -541 -101 -854 -14 -154 -37 -395 -51 -535 -55 -555 -56 -559 -51 -775 8 -348 51 -465 168 -465 52 0 118 39 202 119 163 156 250 303 321 541 70 239 79 387 26 440 -14 14 -34 20 -63 20 l-42 0 2 173 c8 444 35 1060 62 1404 7 87 14 121 32 155 l24 43 95 5 c52 3 151 1 220 -3 240 -16 436 8 530 66 140 86 269 289 270 424 0 108 -15 113 -346 113 l-213 0 24 64 c79 210 85 476 14 689 -35 108 -118 261 -199 368 -43 57 -145 172 -227 255 -293 297 -442 474 -602 714 -102 154 -158 255 -216 391 -41 96 -85 254 -85 308 0 68 -13 67 -72 -6z m191 -1497 c47 -60 177 -205 289 -324 113 -120 238 -257 277 -307 159 -198 268 -383 325 -555 44 -131 48 -124 -72 -139 -407 -50 -872 -205 -1127 -376 -45 -30 -86 -55 -91 -55 -13 0 -79 96 -116 170 -55 111 -67 194 -39 287 l15 51 68 6 c213 18 322 59 392 147 55 70 65 106 64 234 -1 94 -6 125 -33 210 -68 212 -80 257 -97 356 -19 113 -15 329 7 408 l12 44 21 -25 c12 -14 59 -73 105 -132z"/>
+      </g>
+    </svg>
+  );
+}
+
+function TorchersText({ height = 24, color = "#dc2626" }) {
+  const w = height * (242 / 97);
+  return (
+    <svg width={w} height={height} viewBox="0 0 242 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(0,97) scale(0.1,-0.1)" fill={color} stroke="none">
+        <path d="M172 898 c-47 -59 -64 -150 -41 -217 14 -39 6 -50 -19 -28 -25 23 -28 22 -41 -14 -22 -63 -6 -134 39 -179 l22 -22 -20 -21 c-28 -30 -45 -78 -33 -90 7 -7 23 3 48 31 21 22 51 44 67 48 19 4 27 3 23 -3 -4 -6 -14 -84 -23 -174 -18 -184 -12 -229 26 -209 44 24 88 133 60 150 -10 6 -11 35 -6 126 4 65 9 121 12 126 3 4 30 8 60 8 45 0 59 4 79 25 35 34 32 55 -5 55 -29 0 -30 1 -30 50 0 64 -15 93 -92 178 -34 37 -72 91 -85 120 -14 28 -26 52 -28 52 -1 0 -7 -6 -13 -12z m149 -332 c11 -17 19 -36 19 -41 0 -6 -26 -16 -58 -23 -31 -6 -75 -21 -97 -32 -30 -15 -41 -17 -47 -7 -16 25 -4 52 25 55 39 5 54 40 39 91 -7 21 -12 54 -12 72 l1 34 56 -59 c30 -33 64 -73 74 -90z"/>
+        <path d="M686 878 c-9 -12 -16 -30 -16 -39 0 -9 -9 -28 -20 -42 -27 -34 -26 -56 0 -32 l21 19 -3 -80 -3 -79 -37 -3 c-26 -2 -41 -10 -49 -24 -17 -32 6 -40 96 -34 66 5 83 9 98 27 26 33 21 41 -25 37 l-42 -3 3 138 c1 75 0 137 -3 137 -2 0 -12 -10 -20 -22z"/>
+        <path d="M1386 878 c-9 -12 -16 -29 -16 -37 0 -7 -10 -29 -21 -48 -23 -36 -17 -61 7 -29 12 18 14 11 14 -62 l0 -82 -40 0 c-29 0 -42 -5 -50 -19 -5 -11 -10 -22 -10 -25 0 -11 68 -18 126 -11 64 7 94 23 94 52 0 13 -8 14 -40 9 l-41 -6 2 135 c0 75 -1 138 -4 141 -3 3 -12 -5 -21 -18z"/>
+        <path d="M875 867 c-16 -6 -32 -13 -34 -14 -3 -2 -6 -61 -8 -132 -4 -129 -4 -130 21 -146 23 -15 27 -15 58 1 18 10 37 17 42 16 15 -5 36 20 36 43 0 12 7 39 15 58 37 90 1 188 -68 186 -18 -1 -45 -6 -62 -12z m72 -59 c23 -22 33 -91 14 -102 -12 -8 -64 92 -57 109 7 20 16 19 43 -7z m-43 -137 c13 -24 13 -31 2 -40 -18 -15 -26 -4 -26 36 0 41 5 41 24 4z"/>
+        <path d="M1206 861 c-9 -9 -16 -21 -16 -25 0 -4 -27 -38 -60 -74 -33 -36 -59 -70 -57 -76 2 -6 29 -12 60 -14 l57 -3 0 -49 c0 -51 13 -63 38 -38 14 14 17 284 3 292 -4 3 -16 -3 -25 -13z m-16 -108 c0 -23 -4 -28 -25 -28 -31 0 -31 3 -3 32 27 29 28 29 28 -4z"/>
+        <path d="M1558 874 c-3 -3 -4 -23 -1 -44 3 -21 0 -61 -7 -90 -14 -59 -9 -71 17 -41 23 28 64 27 92 -3 26 -27 25 -63 -2 -80 -22 -14 -66 9 -83 42 -11 22 -11 22 -28 3 -11 -12 -15 -27 -11 -40 8 -27 53 -61 79 -61 73 2 129 98 94 163 -17 34 -39 46 -80 47 -24 0 -38 5 -38 13 0 9 11 12 35 9 25 -3 42 1 55 13 29 27 24 34 -18 28 -33 -4 -42 -1 -59 21 -20 25 -34 32 -45 20z"/>
+        <path d="M1144 472 c-6 -4 -18 -21 -27 -38 -11 -21 -26 -33 -46 -37 -40 -8 -87 -74 -108 -149 -13 -45 -21 -58 -35 -58 -28 0 -58 -18 -58 -35 0 -21 -14 -19 -35 5 -10 11 -26 22 -35 25 -15 5 -6 18 47 69 50 49 64 69 61 87 -2 17 -10 25 -28 27 -14 2 -56 12 -94 23 -78 23 -111 19 -119 -13 -5 -22 -10 -184 -8 -295 1 -48 3 -53 24 -53 34 0 47 19 47 67 0 32 4 43 15 43 24 0 64 -49 71 -87 14 -76 75 -43 107 57 l20 65 9 -35 c19 -71 75 -107 138 -90 49 13 86 43 109 89 22 41 47 158 37 168 -3 4 -18 3 -33 -3 -22 -7 -29 -19 -39 -66 -16 -71 -47 -133 -70 -142 -25 -10 -63 32 -70 75 -3 19 -1 53 5 75 10 38 13 40 44 36 20 -2 37 2 44 10 17 21 81 172 76 181 -5 9 -35 9 -49 -1z m-345 -143 c38 -13 38 -19 4 -50 -64 -57 -63 -57 -63 5 0 61 4 64 59 45z"/>
+        <path d="M1513 435 c-21 -14 -21 -17 -7 -50 26 -63 11 -232 -31 -338 -10 -24 30 -23 91 4 42 19 53 20 97 10 44 -10 52 -9 69 6 18 16 18 18 3 29 -24 18 -96 26 -133 15 -32 -10 -33 -9 -30 16 2 21 10 29 38 36 68 17 81 47 20 47 l-40 0 0 40 0 40 59 0 c39 0 63 5 71 15 17 21 3 35 -36 35 -49 0 -69 13 -100 65 -28 49 -38 53 -71 30z"/>
+        <path d="M1792 398 c-7 -7 -12 -44 -13 -92 0 -45 -3 -101 -7 -126 -4 -25 -6 -69 -4 -97 3 -47 6 -53 25 -53 38 0 51 17 57 71 l5 52 32 -27 c19 -16 37 -44 43 -66 13 -48 23 -55 57 -38 19 10 32 28 46 72 l20 59 24 -32 c13 -17 45 -43 70 -58 103 -60 232 -9 209 82 -6 25 -29 48 -130 137 -28 25 -37 40 -33 52 6 16 12 15 57 -10 41 -22 56 -26 77 -18 40 14 38 30 -8 61 -61 40 -135 40 -178 -1 -52 -50 -40 -83 54 -156 51 -40 85 -83 85 -110 0 -34 -114 22 -139 69 -9 15 -22 19 -71 19 -50 0 -63 -4 -78 -22 l-17 -22 -38 27 -37 27 48 44 c83 73 104 128 50 128 -13 0 -56 9 -96 20 -84 23 -94 24 -110 8z m121 -69 c20 -5 37 -14 37 -18 0 -4 -22 -27 -50 -50 l-50 -42 0 60 c0 67 1 68 63 50z"/>
+        <path d="M1408 388 c-14 -10 -18 -32 -20 -103 -3 -85 -4 -90 -25 -93 -22 -3 -23 -1 -23 85 0 112 -21 137 -79 96 -23 -15 -23 -17 -6 -29 17 -12 18 -27 12 -174 l-6 -160 23 0 c33 0 46 21 53 84 5 45 9 56 24 56 15 0 19 -10 21 -58 3 -54 5 -57 30 -60 43 -5 49 19 46 200 -3 136 -5 163 -18 166 -9 1 -23 -3 -32 -10z"/>
+        <path d="M446 361 c-57 -38 -109 -141 -71 -141 11 0 15 -12 15 -49 0 -69 17 -111 52 -125 44 -19 76 -8 124 40 81 80 93 197 28 262 -26 26 -40 32 -75 32 -27 0 -56 -8 -73 -19z m97 -62 c26 -36 24 -100 -5 -158 -30 -57 -52 -63 -67 -20 -16 46 -14 107 6 162 19 53 35 57 66 16z"/>
+      </g>
+    </svg>
   );
 }
 
@@ -280,6 +299,42 @@ textarea.inp { min-height:80px; resize:vertical; margin-bottom:18px; font-size:1
   border:1px solid rgba(220,38,38,.2); font-family:'Share Tech Mono',monospace;
   font-size:11px; color:var(--muted); white-space:pre; overflow-x:auto; line-height:1.7; }
 
+/* ── PHOTOS ── */
+.photo-section { margin-bottom:20px; }
+.photo-section-label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; display:block; }
+.photo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:10px; }
+.photo-thumb { position:relative; aspect-ratio:1; background:var(--surf2); border:1px solid var(--brd2); cursor:pointer; overflow:hidden; }
+.photo-thumb img { width:100%; height:100%; object-fit:cover; transition:opacity .2s; }
+.photo-thumb:hover img { opacity:.75; }
+.photo-thumb-del { position:absolute; top:3px; right:3px; background:rgba(0,0,0,.7); border:none;
+  color:#f87171; font-size:14px; width:22px; height:22px; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border-radius:2px; line-height:1; }
+.photo-upload-btn { border:1px dashed var(--brd2); background:none; color:var(--muted); width:100%;
+  padding:10px; font-size:12px; cursor:pointer; transition:all .2s; aspect-ratio:1;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
+.photo-upload-btn:hover { border-color:var(--acc); color:var(--acc); }
+.photo-upload-btn span { font-size:20px; line-height:1; }
+.photo-uploading { opacity:.5; pointer-events:none; }
+
+/* ── LIGHTBOX ── */
+.lightbox { position:fixed; inset:0; z-index:999; background:rgba(0,0,0,.95);
+  display:flex; align-items:center; justify-content:center; }
+.lightbox-img { max-width:90vw; max-height:85vh; object-fit:contain; }
+.lightbox-close { position:absolute; top:16px; right:16px; background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2); color:#fff; font-size:20px;
+  width:48px; height:48px; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border-radius:4px; }
+.lightbox-close:hover { background:var(--acc); }
+.lightbox-prev, .lightbox-next { position:absolute; top:50%; transform:translateY(-50%);
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:#fff;
+  font-size:22px; width:52px; height:52px; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border-radius:4px; }
+.lightbox-prev:hover, .lightbox-next:hover { background:var(--acc); }
+.lightbox-prev { left:16px; }
+.lightbox-next { right:16px; }
+.lightbox-counter { position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+  font-family:'Share Tech Mono',monospace; font-size:13px; color:rgba(255,255,255,.6); }
+
 /* ── MATCH SCOUTING ── */
 .qual-nav { display:flex; align-items:center; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
 .qual-num-display {
@@ -361,7 +416,7 @@ function Setup({ onConnect }) {
       <div className="lcard" style={{width:520}}>
         <div className="llogo"><TorchersLogo size={44}/><div>
           <div className="ltag">SETUP · ONE TIME</div>
-          <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:22,fontWeight:700,color:"#fff"}}>Connect Supabase</div>
+          <TorchersText height={26} color="#ffffff" />
         </div></div>
         <p style={{fontSize:13,color:"var(--muted)",marginBottom:22,lineHeight:1.7}}>
           Supabase → <strong style={{color:"var(--txt)"}}>Project Settings → API</strong>
@@ -398,7 +453,12 @@ CREATE TABLE IF NOT EXISTS match_scouting (
 ALTER TABLE scouting ENABLE ROW LEVEL SECURITY;
 ALTER TABLE match_scouting ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "open" ON scouting FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "open" ON match_scouting FOR ALL USING (true) WITH CHECK (true);`}</div>
+CREATE POLICY "open" ON match_scouting FOR ALL USING (true) WITH CHECK (true);
+
+-- STORAGE: Supabase Dashboard → Storage → New Bucket
+-- Bucket name: robot-photos
+-- Public bucket: YES (toggle on)
+-- Sonra Policies → Add Policy → "Allow all" seç`}</div>
         </div>
       </div>
     </div>
@@ -417,7 +477,7 @@ function Login({ onLogin }) {
           <TorchersLogo size={56}/>
           <div>
             <div className="ltag">FRC · TUIS5 · 2026</div>
-            <div className="ltitle">TORCHERS<br/>SCOUTING</div>
+            <TorchersText height={38} color="#ffffff" />
           </div>
         </div>
         <div className="lsub">Team 10415 — Internal Scouting Platform</div>
@@ -432,8 +492,115 @@ function Login({ onLogin }) {
   );
 }
 
+// ── Lightbox ──────────────────────────────────────────────────────────────
+function Lightbox({ urls, startIndex, onClose }) {
+  const [idx, setIdx] = useState(startIndex);
+  useEffect(() => {
+    const handler = e => { if(e.key==="Escape") onClose(); if(e.key==="ArrowLeft") setIdx(i=>Math.max(0,i-1)); if(e.key==="ArrowRight") setIdx(i=>Math.min(urls.length-1,i+1)); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [urls.length, onClose]);
+  return (
+    <div className="lightbox" onClick={onClose}>
+      <button className="lightbox-close" onClick={onClose}>✕</button>
+      {idx > 0 && <button className="lightbox-prev" onClick={e=>{e.stopPropagation();setIdx(i=>i-1)}}>‹</button>}
+      <img className="lightbox-img" src={urls[idx]} alt="" onClick={e=>e.stopPropagation()} />
+      {idx < urls.length-1 && <button className="lightbox-next" onClick={e=>{e.stopPropagation();setIdx(i=>i+1)}}>›</button>}
+      <div className="lightbox-counter">{idx+1} / {urls.length}</div>
+    </div>
+  );
+}
+
+// ── PhotoSection ───────────────────────────────────────────────────────────
+function PhotoSection({ teamNumber, supabaseUrl, supabaseKey }) {
+  const [photos, setPhotos] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [lightbox, setLightbox] = useState(null);
+
+  const storageBase = `${supabaseUrl}/storage/v1`;
+  const headers = { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` };
+  const bucket = "robot-photos";
+  const prefix = `team-${teamNumber}/`;
+
+  useEffect(() => {
+    if (!teamNumber) return;
+    loadPhotos();
+  }, [teamNumber]);
+
+  async function loadPhotos() {
+    try {
+      const r = await fetch(`${storageBase}/object/list/${bucket}`, {
+        method: "POST",
+        headers: { ...headers, "Content-Type": "application/json" },
+        body: JSON.stringify({ prefix, limit: 8, offset: 0 }),
+      });
+      const files = await r.json();
+      if (!Array.isArray(files)) return;
+      const urls = files
+        .filter(f => f.name && f.name !== ".emptyFolderPlaceholder")
+        .map(f => `${storageBase}/object/public/${bucket}/${prefix}${f.name}`);
+      setPhotos(urls);
+    } catch {}
+  }
+
+  async function upload(e) {
+    const files = Array.from(e.target.files||[]);
+    if (!files.length) return;
+    if (photos.length + files.length > 8) { alert("Maksimum 8 fotoğraf yüklenebilir!"); return; }
+    setUploading(true);
+    for (const file of files) {
+      const ext = file.name.split(".").pop();
+      const name = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      try {
+        await fetch(`${storageBase}/object/${bucket}/${prefix}${name}`, {
+          method: "POST",
+          headers: { ...headers, "Content-Type": file.type, "x-upsert": "true" },
+          body: file,
+        });
+      } catch {}
+    }
+    await loadPhotos();
+    setUploading(false);
+    e.target.value = "";
+  }
+
+  async function deletePhoto(url) {
+    const name = url.split(`${prefix}`).pop();
+    try {
+      await fetch(`${storageBase}/object/${bucket}`, {
+        method: "DELETE",
+        headers: { ...headers, "Content-Type": "application/json" },
+        body: JSON.stringify({ prefixes: [`${prefix}${name}`] }),
+      });
+      setPhotos(p => p.filter(u => u !== url));
+    } catch {}
+  }
+
+  return (
+    <div className="photo-section">
+      <span className="photo-section-label">Robot Fotoğrafları ({photos.length}/8)</span>
+      <div className="photo-grid">
+        {photos.map((url, i) => (
+          <div key={url} className="photo-thumb">
+            <img src={url} alt={`robot-${i}`} onClick={() => setLightbox(i)} />
+            <button className="photo-thumb-del" onClick={e => { e.stopPropagation(); deletePhoto(url); }}>✕</button>
+          </div>
+        ))}
+        {photos.length < 8 && (
+          <label className={`photo-upload-btn ${uploading ? "photo-uploading" : ""}`}>
+            <span>{uploading ? "⏳" : "+"}</span>
+            <span style={{fontSize:10}}>{uploading ? "Yükleniyor…" : "Fotoğraf Ekle"}</span>
+            <input type="file" accept="image/*" multiple style={{display:"none"}} onChange={upload} disabled={uploading} />
+          </label>
+        )}
+      </div>
+      {lightbox !== null && <Lightbox urls={photos} startIndex={lightbox} onClose={() => setLightbox(null)} />}
+    </div>
+  );
+}
+
 // ── Pit Scout ─────────────────────────────────────────────────────────────
-function ScoutForm({ api, onSaved }) {
+function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
   const [q, setQ] = useState("");
   const [showDrop, setShowDrop] = useState(false);
   const [sel, setSel] = useState(null);
@@ -514,6 +681,7 @@ function ScoutForm({ api, onSaved }) {
         </div>
         <label className="lbl">Notes</label>
         <textarea className="inp" value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} placeholder="Gözlemler, strateji notları…" />
+        <PhotoSection teamNumber={sel.team} supabaseUrl={supabaseUrl} supabaseKey={supabaseKey} />
         <div className="srow">
           <button className="btn-save" onClick={save} disabled={status==="saving"||status==="clearing"}>
             {status==="saving"?"KAYDEDİLİYOR…":existingId?"GÜNCELLE":"KAYDET"}
@@ -904,7 +1072,7 @@ export default function App() {
     <div>
       <style>{CSS}</style>
       <nav className="nav">
-        <div className="nbrand"><TorchersLogo size={32}/><span className="nbrand-text">TORCHERS</span></div>
+        <div className="nbrand"><TorchersLogo size={32}/><TorchersText height={18} color="#dc2626" /></div>
         {[["pit","Pit Scout"],["match","Match Scout"],["dashboard","Dashboard"],["rankings","Rankings"]].map(([k,l])=>(
           <button key={k} className={`ntab ${tab===k?"on":""}`} onClick={()=>setTab(k)}>{l}</button>
         ))}
@@ -912,7 +1080,7 @@ export default function App() {
         <button className="nlock" onClick={()=>setAuthed(false)}>Kilitle</button>
       </nav>
       <div className="main">
-        {tab==="pit"       && <ScoutForm     api={api} onSaved={()=>setRk(k=>k+1)} />}
+        {tab==="pit"       && <ScoutForm     api={api} supabaseUrl={creds.url} supabaseKey={creds.key} onSaved={()=>setRk(k=>k+1)} />}
         {tab==="match"     && <MatchScouting api={api} onSaved={()=>setRk(k=>k+1)} />}
         {tab==="dashboard" && <Dashboard     api={api} refreshKey={rk} />}
         {tab==="rankings"  && <Rankings      api={api} refreshKey={rk} />}
