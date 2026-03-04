@@ -64,6 +64,7 @@ const BLANK_PIT = { performance:"", scoring:"", shooter_type:"", intake_type:"",
 const PERF_SCORE  = { Perfect:5, Good:4, Average:3, Poor:1, DNQ:0 };
 const SCORE_SCORE = { Excellent:5, Good:4, Average:3, Poor:1, None:0 };
 const CLIMB_SCORE = { High:3, Mid:2, Low:1, None:0 };
+
 function totalPitScore(r) {
   return (PERF_SCORE[r.performance]||0)*2 + (SCORE_SCORE[r.scoring]||0)*2 + (CLIMB_SCORE[r.climb]||0);
 }
@@ -548,7 +549,6 @@ function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
   const [status, setStatus] = useState(null);
   const [matchHistory, setMatchHistory] = useState([]);
 
-  // Load all scouted team numbers for the grid
   useEffect(() => {
     api("/scouting?select=team_number").then(r=>r.json()).then(d=>{
       if (Array.isArray(d)) setScoutedSet(new Set(d.map(x=>x.team_number)));
@@ -586,14 +586,10 @@ function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
     setStatus("saving");
     try {
       const payload = { ...form, team_number: sel.team, team_name: sel.name, pit_number: sel.pit };
-      const r = await api("/scouting", {
-        method: existingId ? "PATCH" : "POST",
-        body: JSON.stringify(payload),
-        ...(existingId ? { prefer: "return=representation", extraHeaders: { "Range-Unit": "items" }, pathSuffix: `?id=eq.${existingId}` } : {})
-      });
-      // Handle PATCH path differently if needed by custom api wrapper
       if (existingId) {
         await api(`/scouting?id=eq.${existingId}`, { method: "PATCH", body: JSON.stringify(payload) });
+      } else {
+        await api("/scouting", { method: "POST", body: JSON.stringify(payload) });
       }
       
       setScoutedSet(prev => new Set([...prev, sel.team]));
@@ -634,25 +630,24 @@ function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
         <div className="rcard" style={{padding:24, borderTop:"4px solid var(--acc)"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:20}}>
             <div>
-              <div style={{fontSize:11,fontWeight:700,color:var(--muted),textTransform:"uppercase",letterSpacing:1}}>{sel.from}</div>
-              <h3 style={{fontSize:24,fontFamily:"'Rajdhani',sans-serif"}}>{sel.name} <span style={{color:var(--acc)}}>#{sel.team}</span></h3>
+              <div style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:1}}>{sel.from}</div>
+              <h3 style={{fontSize:24,fontFamily:"'Rajdhani',sans-serif"}}>{sel.name} <span style={{color:"var(--acc)"}}>#{sel.team}</span></h3>
             </div>
             <div style={{textAlign:"right"}}>
-              <div style={{fontSize:10,color:var(--muted)}}>PIT NUMBER</div>
-              <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:20,color:var(--acc)}}>{sel.pit}</div>
+              <div style={{fontSize:10,color:"var(--muted)"}}>PIT NUMBER</div>
+              <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:20,color:"var(--acc)"}}>{sel.pit}</div>
             </div>
           </div>
 
-          {/* Match History */}
           {matchHistory.length > 0 && (
             <div style={{marginBottom:24, padding:16, background:"rgba(0,0,0,.2)", border:"1px solid var(--brd)"}}>
-              <div style={{fontSize:10,fontWeight:700,letterSpacing:1,color:var(--muted),textTransform:"uppercase",marginBottom:10}}>Maç Geçmişi</div>
+              <div style={{fontSize:10,fontWeight:700,letterSpacing:1,color:"var(--muted)",textTransform:"uppercase",marginBottom:10}}>Maç Geçmişi</div>
               <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:8}}>
                 {matchHistory.map(m => {
                   const s = (parseFloat(m.auto_score)||0) + (parseFloat(m.auto_climb)||0) + (parseFloat(m.teleop_score)||0) + (parseFloat(m.teleop_climb)||0);
                   return (
                     <div key={m.id} style={{minWidth:80, background:m.alliance==="red"?"rgba(220,38,38,.1)":"rgba(37,99,235,.1)", padding:8, border:"1px solid "+(m.alliance==="red"?"rgba(220,38,38,.2)":"rgba(37,99,235,.2)")}}>
-                      <div style={{fontSize:9,fontWeight:700,color:var(--muted)}}>Q{m.qual_number}</div>
+                      <div style={{fontSize:9,fontWeight:700,color:"var(--muted)"}}>Q{m.qual_number}</div>
                       <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:18,color:"var(--txt)",margin:"4px 0"}}>{s}</div>
                       <div style={{fontSize:9,color:"var(--muted)"}}>
                         {m.auto_score||0}+{m.auto_climb||0} / {m.teleop_score||0}+{m.teleop_climb||0}
@@ -665,10 +660,8 @@ function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
             </div>
           )}
 
-          {/* Photos */}
           <PhotoSection teamNumber={sel.team} supabaseUrl={supabaseUrl} supabaseKey={supabaseKey} />
 
-          {/* Pit scout form */}
           <div style={{fontSize:10,fontWeight:700,letterSpacing:2,color:"var(--muted)",textTransform:"uppercase",marginBottom:14,marginTop:8}}> Pit Scout Formu </div>
           <div className="fgrid">
             {[["Performance","performance",PERF_OPTS],["Scoring","scoring",SCORE_OPTS],
@@ -706,7 +699,7 @@ function MatchScout({ api, onSaved }) {
   const [qual, setQual] = useState(1);
   const [matchData, setMatchData] = useState([]);
   const [savedQuals, setSavedQuals] = useState(new Set());
-  const [winners, setWinners] = useState({}); // Kazananlar sözlüğü
+  const [winners, setWinners] = useState({});
   const [status, setStatus] = useState(null);
   const [jumpVal, setJumpVal] = useState("");
   const [loadedQuals, setLoadedQuals] = useState({});
@@ -758,9 +751,7 @@ function MatchScout({ api, onSaved }) {
           ]);
           setMatchData(empty);
         }
-      } catch {
-        setMatchData([]);
-      }
+      } catch { setMatchData([]); }
     }
     loadQual();
   }, [qual, api, loadedQuals]);
@@ -775,7 +766,6 @@ function MatchScout({ api, onSaved }) {
   async function saveQual() {
     setStatus("saving");
     try {
-      // Upsert logic
       for (const robot of matchData) {
         const { id, updated_at, ...payload } = robot;
         if (id) {
@@ -785,11 +775,9 @@ function MatchScout({ api, onSaved }) {
         }
       }
       setSavedQuals(prev => new Set([...prev, qual]));
-      // Kazananı anlık hesapla
       const redTotal = getAllianceRobots("red").reduce((s,r) => s + (parseFloat(r.auto_score)||0)+(parseFloat(r.auto_climb)||0)+(parseFloat(r.teleop_score)||0)+(parseFloat(r.teleop_climb)||0), 0);
       const blueTotal = getAllianceRobots("blue").reduce((s,r) => s + (parseFloat(r.auto_score)||0)+(parseFloat(r.auto_climb)||0)+(parseFloat(r.teleop_score)||0)+(parseFloat(r.teleop_climb)||0), 0);
       setWinners(prev => ({...prev, [qual]: redTotal > blueTotal ? "red" : blueTotal > redTotal ? "blue" : "draw"}));
-      
       setLoadedQuals(prev => ({...prev, [qual]: matchData}));
       setStatus("saved");
       onSaved && onSaved();
@@ -800,13 +788,10 @@ function MatchScout({ api, onSaved }) {
     if (!confirm(`Qual ${qual} verilerini tamamen silmek istediğinize emin misiniz?`)) return;
     setStatus("saving");
     try {
-      const r = await api(`/match_scouting?qual_number=eq.${qual}`, { method: "DELETE" });
-      if (!r.ok) throw new Error();
-      
+      await api(`/match_scouting?qual_number=eq.${qual}`, { method: "DELETE" });
       setSavedQuals(prev => { const s = new Set(prev); s.delete(qual); return s; });
       setWinners(prev => { const w = {...prev}; delete w[qual]; return w; });
       setLoadedQuals(prev => { const l = {...prev}; delete l[qual]; return l; });
-      
       const empty = [1,2,3].flatMap(s => [
         {qual_number:qual, alliance:"red", robot_slot:s, team_number:null, auto_climb:0, auto_score:0, teleop_score:0, teleop_climb:0, notes:""},
         {qual_number:qual, alliance:"blue", robot_slot:s, team_number:null, auto_climb:0, auto_score:0, teleop_score:0, teleop_climb:0, notes:""}
@@ -816,29 +801,23 @@ function MatchScout({ api, onSaved }) {
     } catch { setStatus("error"); }
   }
 
-  const redRobots = getAllianceRobots("red");
-  const blueRobots = getAllianceRobots("blue");
-  const redOverall = allianceOverall(redRobots);
-  const blueOverall = allianceOverall(blueRobots);
+  const redOverall = allianceOverall(getAllianceRobots("red"));
+  const blueOverall = allianceOverall(getAllianceRobots("blue"));
 
   return (
     <div>
       <div className="ph"><h2>Match Scouting</h2><p>Qual bazında alliance skorlarını takip et</p></div>
 
-      {/* Qual dots */}
       <div className="qual-dots">
         {Array.from({length:TOTAL_QUALS},(_,i)=>(
           <div 
             key={i+1} 
             className={`qual-dot ${savedQuals.has(i+1)?"filled":""} ${winners[i+1] || ""}`} 
-            title={`Qual ${i+1}`} 
-            style={{cursor:"pointer", background: winners[i+1] === 'red' ? 'var(--red)' : winners[i+1] === 'blue' ? 'var(--blue)' : undefined}} 
             onClick={()=>setQual(i+1)} 
           />
         ))}
       </div>
 
-      {/* Nav */}
       <div className="qual-nav">
         <button className="qual-btn" onClick={()=>setQual(q=>Math.max(1,q-1))} disabled={qual<=1}>◀ PREV</button>
         <div className="qual-num-display">QUAL {qual}</div>
@@ -859,7 +838,6 @@ function MatchScout({ api, onSaved }) {
         </div>
       </div>
 
-      {/* RED Alliance */}
       <div className="alliance-block">
         <div className="alliance-header red">
           🔴 RED ALLIANCE <span className="alliance-overall red">Overall: {redOverall}</span>
@@ -887,7 +865,6 @@ function MatchScout({ api, onSaved }) {
         </div>
       </div>
 
-      {/* BLUE Alliance */}
       <div className="alliance-block">
         <div className="alliance-header blue">
           🔵 BLUE ALLIANCE <span className="alliance-overall blue">Overall: {blueOverall}</span>
@@ -1074,7 +1051,7 @@ export default function App() {
       <nav className="nav">
         <div className="nbrand"><TorchersLogo size={32}/><TorchersText height={18} color="#dc2626" /></div>
         {[["pit","Pit Scout"],["match","Match Scout"],["dashboard","Dashboard"],["rankings","Rankings"]].map(([k,l])=>(
-          <button key={k} className={`ntab ${tab===k?"on":"""}`} onClick={()=>setTab(k)}>{l}</button>
+          <button key={k} className={`ntab ${tab===k?"on":""}`} onClick={()=>setTab(k)}>{l}</button>
         ))}
         <div className="nsp"/>
         <button className="nlock" onClick={()=>setAuthed(false)}>Kilitle</button>
