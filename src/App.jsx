@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 
 // ─── SUPABASE CONFIG ──────────────────────────────────────────────────────────
 // Paste your Supabase credentials here after setup
-const SUPABASE_URL = "YOUR_SUPABASE_URL";       // e.g. https://xxxx.supabase.co
-const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";      // from Project Settings → API
+const SUPABASE_URL = "https://czplcdhhzehxqfbxkito.supabase.co";       // e.g. https://xxxx.supabase.co
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6cGxjZGhoemVoeHFmYnhraXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2MjU2MDgsImV4cCI6MjA4ODIwMTYwOH0.hzXDcccXtj4UuI8JZRQQR03xhgyjOvSJlFBm348JYAM";      // from Project Settings → API
 
 const TEAM_PASSWORD = "torchers2026";
 
