@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const SUPABASE_URL = "https://czplcdhhzehxqfbxkito.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6cGxjZGhoemVoeHFmYnhraXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2MjU2MDgsImV4cCI6MjA4ODIwMTYwOH0.hzXDcccXtj4UuI8JZRQQR03xhgyjOvSJlFBm348JYAM";
-const TEAM_PASSWORD = "torchers2026";
+const TEAM_PASSWORD = "torchers2026filik";
 
 const LOGO_DATA_URI = "data:image/jpeg;base64,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";
 
@@ -55,19 +55,19 @@ const TEAMS = [
 ];
 
 const TOTAL_QUALS = 80;
-const PERF_OPTS    = ["Perfect","Good","Average","Poor","NG"];
-const SCORE_OPTS   = ["While Moving","Fixed Place","Fixed with image processing","None"];
-const SHOOTER_OPTS = ["360 Turret","Bevel Turret","Kitbot","Fixed Shooter", "None"];
-const INTAKE_OPTS  = ["Over Bumper","Under Bumper","Both","None"];
-const CLIMB_OPTS   = ["L1 Middle","L1 Side","L2 Middle","L2 Side", "L3 Middle", "L3 Side"];
-const CAP_OPTS     = ["Perfect (30+)","High (21-30)","Medium (11-20)","Low (5-10)","None"];
+const PERF_OPTS    = ["Perfect","Good","Average","Poor","DNQ"];
+const SCORE_OPTS   = ["Excellent","Good","Average","Poor","None"];
+const SHOOTER_OPTS = ["High Goal","Low Goal","Both","None"];
+const INTAKE_OPTS  = ["Ground","Human Player","Both","None"];
+const CLIMB_OPTS   = ["High","Mid","Low","None"];
+const CAP_OPTS     = ["High (5+)","Medium (3-4)","Low (1-2)","None"];
 const BLANK_PIT = { performance:"", scoring:"", shooter_type:"", intake_type:"", climb:"", capacity:"", notes:"" };
 
-const PERF_SCORE  = { Perfect:5, Good:4, Average:3, Poor:1, NG:0 };
+const PERF_SCORE  = { Perfect:5, Good:4, Average:3, Poor:1, DNQ:0 };
 const SCORE_SCORE = { Excellent:5, Good:4, Average:3, Poor:1, None:0 };
 const CLIMB_SCORE = { High:3, Mid:2, Low:1, None:0 };
 function totalPitScore(r) {
-  return (PERF_SCORE[r.performance]||0)*2 + (SCORE_SCORE[r.scoring]||0)*2 + (CLIMB_SCORE[r.climb]||0)
+  return (PERF_SCORE[r.performance]||0)*2 + (SCORE_SCORE[r.scoring]||0)*2 + (CLIMB_SCORE[r.climb]||0);
 }
 
 function makeApi(url, key) {
@@ -624,37 +624,6 @@ function MatchScouting({ api, onSaved }) {
   const redOverall  = allianceOverall(redRobots);
   const blueOverall = allianceOverall(blueRobots);
 
-  function RobotPanel({ alliance, slot }) {
-    const r = getRobot(alliance, slot);
-    const color = alliance==="red" ? "#fca5a5" : "#93c5fd";
-    const borderColor = alliance==="red" ? "rgba(220,38,38,.3)" : "rgba(37,99,235,.3)";
-    return (
-      <div className="match-robot">
-        <div className="match-robot-label" style={{color}}>
-          {alliance.toUpperCase()} {slot}
-          <select className={`team-select ${alliance}-sel`} value={r.team_number||""}
-            onChange={e=>setRobot(alliance,slot,"team_number",e.target.value)}
-            style={{marginLeft:8,flex:1}}>
-            <option value="">— Team —</option>
-            {TEAMS.map(t=><option key={t.team} value={t.team}>#{t.team} {t.name}</option>)}
-          </select>
-        </div>
-        <div className="match-fields">
-          {[["auto_climb","Auto Climb"],["auto_score","Auto Score"],["teleop_score","Teleop Score"],["teleop_climb","Teleop Climb"]].map(([field,label])=>(
-            <div className="match-field" key={field}>
-              <label>{label}</label>
-              <NumInput value={r[field]||""} onChange={v=>setRobot(alliance,slot,field,v)} />
-            </div>
-          ))}
-          <div className="match-notes">
-            <label style={{fontSize:10,fontWeight:600,letterSpacing:1,textTransform:"uppercase",color:"var(--muted)",display:"block",marginBottom:4}}>Notes</label>
-            <textarea value={r.notes||""} onChange={e=>setRobot(alliance,slot,"notes",e.target.value)} placeholder="Not…" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div>
       <div className="ph"><h2>Match Scouting</h2><p>Qual bazında alliance skorlarını takip et</p></div>
@@ -691,7 +660,34 @@ function MatchScouting({ api, onSaved }) {
           <span className="alliance-overall red">Overall: {redOverall}</span>
         </div>
         <div className="match-grid">
-          {[1,2,3].map(s=><RobotPanel key={s} alliance="red" slot={s} />)}
+          {[1,2,3].map(s => {
+            const r = getRobot("red", s);
+            return (
+              <div key={s} className="match-robot">
+                <div className="match-robot-label" style={{color:"#fca5a5"}}>
+                  RED {s}
+                  <select className="team-select red-sel" value={r.team_number||""}
+                    onChange={e=>setRobot("red",s,"team_number",e.target.value)}
+                    style={{marginLeft:8,flex:1}}>
+                    <option value="">— Team —</option>
+                    {TEAMS.map(t=><option key={t.team} value={t.team}>#{t.team} {t.name}</option>)}
+                  </select>
+                </div>
+                <div className="match-fields">
+                  {[["auto_climb","Auto Climb"],["auto_score","Auto Score"],["teleop_score","Teleop Score"],["teleop_climb","Teleop Climb"]].map(([field,label])=>(
+                    <div className="match-field" key={field}>
+                      <label>{label}</label>
+                      <NumInput value={r[field]||""} onChange={v=>setRobot("red",s,field,v)} />
+                    </div>
+                  ))}
+                  <div className="match-notes">
+                    <label style={{fontSize:10,fontWeight:600,letterSpacing:1,textTransform:"uppercase",color:"var(--muted)",display:"block",marginBottom:4}}>Notes</label>
+                    <textarea value={r.notes||""} onChange={e=>setRobot("red",s,"notes",e.target.value)} placeholder="Not…" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -704,7 +700,34 @@ function MatchScouting({ api, onSaved }) {
           <span className="alliance-overall blue">Overall: {blueOverall}</span>
         </div>
         <div className="match-grid">
-          {[1,2,3].map(s=><RobotPanel key={s} alliance="blue" slot={s} />)}
+          {[1,2,3].map(s => {
+            const r = getRobot("blue", s);
+            return (
+              <div key={s} className="match-robot">
+                <div className="match-robot-label" style={{color:"#93c5fd"}}>
+                  BLUE {s}
+                  <select className="team-select blue-sel" value={r.team_number||""}
+                    onChange={e=>setRobot("blue",s,"team_number",e.target.value)}
+                    style={{marginLeft:8,flex:1}}>
+                    <option value="">— Team —</option>
+                    {TEAMS.map(t=><option key={t.team} value={t.team}>#{t.team} {t.name}</option>)}
+                  </select>
+                </div>
+                <div className="match-fields">
+                  {[["auto_climb","Auto Climb"],["auto_score","Auto Score"],["teleop_score","Teleop Score"],["teleop_climb","Teleop Climb"]].map(([field,label])=>(
+                    <div className="match-field" key={field}>
+                      <label>{label}</label>
+                      <NumInput value={r[field]||""} onChange={v=>setRobot("blue",s,field,v)} />
+                    </div>
+                  ))}
+                  <div className="match-notes">
+                    <label style={{fontSize:10,fontWeight:600,letterSpacing:1,textTransform:"uppercase",color:"var(--muted)",display:"block",marginBottom:4}}>Notes</label>
+                    <textarea value={r.notes||""} onChange={e=>setRobot("blue",s,"notes",e.target.value)} placeholder="Not…" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
