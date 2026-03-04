@@ -79,6 +79,8 @@ function makeApi(url, key) {
   };
 }
 
+// ── Components ────────────────────────────────────────────────────────────
+
 function TorchersLogo({ size = 36, color = "#dc2626" }) {
   const h = size;
   const w = size * (499 / 732);
@@ -207,57 +209,20 @@ input,textarea { font-family:'Barlow',sans-serif; }
 .nbrand { display:flex; align-items:center; gap:10px; padding:10px 24px 10px 0;
   border-right:1px solid var(--brd); margin-right:4px; }
 .nbrand-text { font-family:'Rajdhani',sans-serif; font-size:20px; font-weight:700; color:var(--acc); letter-spacing:2px; }
-.ntab { padding:18px 16px; font-family:'Rajdhani',sans-serif; font-size:12px; font-weight:600;
-  letter-spacing:2px; text-transform:uppercase; color:var(--muted); border:none; background:none;
+.ntab { padding:18px 16px; font-family:'Rajdhani',sans-serif; font-size:12px; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; color:var(--muted); border:none; background:none;
   border-bottom:2px solid transparent; margin-bottom:-1px; transition:all .18s; }
 .ntab:hover { color:var(--txt); }
 .ntab.on { color:var(--acc); border-bottom-color:var(--acc); }
 .nsp { flex:1; }
-.nlock { font-size:11px; color:var(--muted); background:none; border:1px solid var(--brd2);
-  padding:6px 14px; letter-spacing:1px; text-transform:uppercase; transition:all .2s; }
-.nlock:hover { border-color:var(--acc); color:var(--acc); }
+.nlock { font-size:11px; color:var(--muted); background:none; border:1px solid var(--brd2); padding:5px 12px; }
 
-.main { max-width:1320px; margin:0 auto; padding:28px 24px; }
-.ph { margin-bottom:22px; }
-.ph h2 { font-family:'Rajdhani',sans-serif; font-size:28px; font-weight:700; color:#fff; }
-.ph p { color:var(--muted); font-size:13px; margin-top:3px; }
+.main { padding:32px 28px; max-width:1440px; margin:0 auto; }
+.ph { margin-bottom:28px; border-left:4px solid var(--acc); padding-left:20px; }
+.ph h2 { font-family:'Rajdhani',sans-serif; font-size:28px; color:#fff; letter-spacing:1px; }
+.ph p { color:var(--muted); font-size:13px; margin-top:2px; }
 
-.tsearch { position:relative; margin-bottom:20px; }
-.tsearch input { width:100%; background:var(--surf); border:1px solid var(--brd2); color:var(--txt);
-  font-size:14px; padding:11px 16px; outline:none; transition:border-color .2s; }
-.tsearch input:focus { border-color:var(--acc); }
-.tdrop { position:absolute; top:100%; left:0; right:0; z-index:60; background:var(--surf2);
-  border:1px solid var(--brd2); border-top:none; max-height:270px; overflow-y:auto; }
-.topt { padding:9px 16px; display:flex; align-items:center; gap:10px; transition:background .12s; cursor:pointer; }
-.topt:hover { background:#1a1a1a; }
-.tbadge { font-family:'Share Tech Mono',monospace; font-size:11px; background:rgba(220,38,38,.15);
-  color:var(--acc); padding:2px 8px; white-space:nowrap; flex-shrink:0; }
-.tname { font-size:13px; font-weight:600; }
-.tfrom { font-size:11px; color:var(--muted); margin-left:auto; }
-
-.scard { background:var(--surf); border:1px solid var(--acc); padding:14px 20px;
-  margin-bottom:22px; display:flex; align-items:center; gap:16px; border-left:4px solid var(--acc); }
-.snum { font-family:'Share Tech Mono',monospace; font-size:28px; color:var(--acc); line-height:1; }
-.sname { font-family:'Rajdhani',sans-serif; font-size:21px; font-weight:700; }
-.smeta { font-size:11px; color:var(--muted); }
-.chg { margin-left:auto; font-size:11px; color:var(--muted); background:none;
-  border:1px solid var(--brd2); padding:4px 10px; transition:all .2s; }
-.chg:hover { border-color:var(--acc); color:var(--acc); }
-
-.fgrid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
-.fg { display:flex; flex-direction:column; gap:7px; }
-.fg label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
-textarea.inp { min-height:80px; resize:vertical; margin-bottom:18px; font-size:14px; }
-.srow { display:flex; align-items:center; gap:14px; }
-.btn-save { padding:12px 32px; background:var(--acc); color:#fff; border:none;
-  font-family:'Rajdhani',sans-serif; font-size:15px; font-weight:700; letter-spacing:2px;
-  text-transform:uppercase; transition:all .2s; }
-.btn-save:hover { background:var(--acc2); }
-.btn-save:disabled { opacity:.35; cursor:not-allowed; }
-.sok { font-size:13px; color:var(--good); }
-.serr { font-size:13px; color:#f87171; }
-
-.sbar { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px; }
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px; }
 .sc { background:var(--surf); border:1px solid var(--brd); border-top:2px solid var(--acc); padding:18px 22px; }
 .scn { font-family:'Share Tech Mono',monospace; font-size:34px; color:var(--acc); line-height:1; }
 .scl { font-size:11px; color:var(--muted); margin-top:5px; text-transform:uppercase; letter-spacing:1px; }
@@ -266,192 +231,145 @@ textarea.inp { min-height:80px; resize:vertical; margin-bottom:18px; font-size:1
 .fbar input { background:var(--surf); border:1px solid var(--brd2); color:var(--txt);
   padding:7px 12px; font-size:13px; outline:none; width:210px; transition:border-color .2s; }
 .fbar input:focus { border-color:var(--acc); }
-.sbtn { padding:7px 14px; background:var(--surf); border:1px solid var(--brd2); color:var(--muted);
-  font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; transition:all .15s; }
-.sbtn:hover,.sbtn.on { border-color:var(--acc); color:var(--acc); }
+.sbtn { background:var(--surf); border:1px solid var(--brd2); color:var(--muted);
+  padding:7px 12px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+.sbtn.on { border-color:var(--acc); color:var(--acc); }
 
-.tbl { width:100%; border-collapse:collapse; }
-.tbl th { text-align:left; padding:9px 12px; font-size:10px; font-weight:700; letter-spacing:2px;
-  text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--brd);
-  background:var(--surf); white-space:nowrap; }
-.tbl td { padding:10px 12px; border-bottom:1px solid #151515; vertical-align:middle; }
-.tbl tr:hover td { background:#0f0f0f; }
-.tnc { font-family:'Share Tech Mono',monospace; color:var(--acc); font-size:13px; }
+.tbl { width:100%; border-collapse:collapse; background:var(--surf); border:1px solid var(--brd); }
+.tbl th { text-align:left; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+  color:var(--muted); padding:14px 16px; border-bottom:1px solid var(--brd); }
+.tbl td { padding:14px 16px; border-bottom:1px solid var(--brd); font-size:13px; }
+.tbl tr:hover { background:var(--surf2); }
+.tnc { font-family:'Share Tech Mono',monospace; font-size:15px; color:var(--acc); font-weight:700; }
 
-.rlist { display:flex; flex-direction:column; gap:8px; }
-.rcard { background:var(--surf); border:1px solid var(--brd); padding:14px 20px;
-  display:flex; align-items:center; gap:14px; }
-.rcard.g1 { border-left:3px solid #ffd700; }
-.rcard.g2 { border-left:3px solid #c0c0c0; }
-.rcard.g3 { border-left:3px solid #cd7f32; }
-.rpos { font-family:'Share Tech Mono',monospace; font-size:20px; color:var(--muted); width:32px; text-align:center; flex-shrink:0; }
-.rpos.g1 { color:#ffd700; } .rpos.g2 { color:#c0c0c0; } .rpos.g3 { color:#cd7f32; }
-.rinfo { flex:1; }
-.rn { font-family:'Rajdhani',sans-serif; font-size:18px; font-weight:700; }
-.rm { font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--muted); }
-.rpills { display:flex; gap:5px; flex-wrap:wrap; margin-top:4px; }
-.rbar { display:flex; align-items:center; gap:10px; }
-.btrack { width:160px; height:5px; background:#1f1f1f; }
-.bfill { height:100%; background:var(--acc); transition:width .4s; }
-.rval { font-family:'Share Tech Mono',monospace; font-size:13px; color:var(--acc); }
-.nodata { text-align:center; padding:60px; color:var(--muted); }
-.setup-sql { margin-top:20px; padding:14px 16px; background:rgba(220,38,38,.06);
-  border:1px solid rgba(220,38,38,.2); font-family:'Share Tech Mono',monospace;
-  font-size:11px; color:var(--muted); white-space:pre; overflow-x:auto; line-height:1.7; }
+.rgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:20px; }
+.rcard { background:var(--surf); border:1px solid var(--brd); position:relative; overflow:hidden; transition:transform .2s; }
+.rcard:hover { transform:translateY(-2px); border-color:var(--brd2); }
+.rheader { padding:16px; border-bottom:1px solid var(--brd); display:flex; justify-content:space-between; align-items:center; }
+.rname { font-weight:700; font-size:15px; }
+.rnum { font-family:'Share Tech Mono',monospace; color:var(--acc); font-size:14px; }
+.rbody { padding:16px; }
+.rpills { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:12px; }
+.rbar { margin-top:12px; }
+.btrack { height:6px; background:var(--brd); border-radius:3px; overflow:hidden; }
+.bfill { height:100%; background:linear-gradient(90deg, var(--acc), var(--acc2)); }
+.bval { display:flex; justify-content:space-between; font-size:10px; font-weight:700; margin-top:5px; color:var(--muted); }
 
-/* ── PHOTOS ── */
-.photo-section { margin-bottom:20px; }
-.photo-section-label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; display:block; }
-.photo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:10px; }
-.photo-thumb { position:relative; aspect-ratio:1; background:var(--surf2); border:1px solid var(--brd2); cursor:pointer; overflow:hidden; }
-.photo-thumb img { width:100%; height:100%; object-fit:cover; transition:opacity .2s; }
-.photo-thumb:hover img { opacity:.75; }
-.photo-thumb-del { position:absolute; top:3px; right:3px; background:rgba(0,0,0,.7); border:none;
-  color:#f87171; font-size:14px; width:22px; height:22px; display:flex; align-items:center; justify-content:center;
-  cursor:pointer; border-radius:2px; line-height:1; }
-.photo-upload-btn { border:1px dashed var(--brd2); background:none; color:var(--muted); width:100%;
-  padding:10px; font-size:12px; cursor:pointer; transition:all .2s; aspect-ratio:1;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
-.photo-upload-btn:hover { border-color:var(--acc); color:var(--acc); }
-.photo-upload-btn span { font-size:20px; line-height:1; }
-.photo-uploading { opacity:.5; pointer-events:none; }
+.fgrid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.fg { display:flex; flex-direction:column; gap:8px; }
+.fg label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); }
 
-/* ── LIGHTBOX ── */
-.lightbox { position:fixed; inset:0; z-index:999; background:rgba(0,0,0,.95);
-  display:flex; align-items:center; justify-content:center; }
-.lightbox-img { max-width:90vw; max-height:85vh; object-fit:contain; }
-.lightbox-close { position:absolute; top:16px; right:16px; background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.2); color:#fff; font-size:20px;
-  width:48px; height:48px; display:flex; align-items:center; justify-content:center;
-  cursor:pointer; border-radius:4px; }
-.lightbox-close:hover { background:var(--acc); }
-.lightbox-prev, .lightbox-next { position:absolute; top:50%; transform:translateY(-50%);
-  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:#fff;
-  font-size:22px; width:52px; height:52px; display:flex; align-items:center; justify-content:center;
-  cursor:pointer; border-radius:4px; }
-.lightbox-prev:hover, .lightbox-next:hover { background:var(--acc); }
-.lightbox-prev { left:16px; }
-.lightbox-next { right:16px; }
-.lightbox-counter { position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
-  font-family:'Share Tech Mono',monospace; font-size:13px; color:rgba(255,255,255,.6); }
+.srow { display:flex; align-items:center; gap:16px; margin-top:24px; }
+.btn-save { background:var(--acc); color:#fff; border:none; padding:12px 32px;
+  font-family:'Rajdhani',sans-serif; font-size:14px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; transition:all .2s; }
+.btn-save:hover { background:var(--acc2); transform:translateY(-1px); }
+.btn-save:disabled { opacity:.4; cursor:not-allowed; }
+.sok { color:var(--good); font-weight:700; font-size:13px; }
+.serr { color:var(--red); font-weight:700; font-size:13px; }
 
-/* ── PIT GRID ── */
-.pit-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:8px; margin-top:8px; }
-.pit-card { position:relative; padding:12px 10px; cursor:pointer; transition:all .18s; border:1px solid; }
-.pit-empty { background:#111; border-color:#222; }
-.pit-empty:hover { border-color:#444; background:#161616; }
-.pit-done { background:rgba(220,38,38,.1); border-color:rgba(220,38,38,.5); }
-.pit-done:hover { background:rgba(220,38,38,.18); border-color:#dc2626; }
-.pit-num { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
-.pit-empty .pit-num { color:#333; }
-.pit-done .pit-num { color:rgba(220,38,38,.7); }
-.pit-team { font-family:'Share Tech Mono',monospace; font-size:15px; font-weight:700; margin-bottom:2px; }
-.pit-empty .pit-team { color:#444; }
-.pit-done .pit-team { color:#fca5a5; }
-.pit-name { font-size:10px; line-height:1.3; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
-.pit-empty .pit-name { color:#333; }
-.pit-done .pit-name { color:#e2e8f0; }
-.pit-check { position:absolute; top:6px; right:8px; color:#dc2626; font-size:12px; font-weight:700; }
-.qual-nav { display:flex; align-items:center; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
-.qual-num-display {
-  font-family:'Share Tech Mono',monospace; font-size:28px; font-weight:700;
-  color:var(--acc); padding:8px 20px; background:var(--surf); border:1px solid var(--brd2);
-  min-width:80px; text-align:center;
-}
-.qual-btn { padding:10px 18px; background:var(--surf); border:1px solid var(--brd2);
-  color:var(--muted); font-family:'Rajdhani',sans-serif; font-size:15px; font-weight:700;
-  letter-spacing:1px; transition:all .2s; }
-.qual-btn:hover { border-color:var(--acc); color:var(--acc); }
-.qual-btn:disabled { opacity:.3; cursor:not-allowed; }
-.qual-jump { display:flex; gap:6px; align-items:center; margin-left:auto; }
-.qual-jump input { background:var(--surf); border:1px solid var(--brd2); color:var(--txt);
-  padding:8px 10px; width:80px; font-family:'Share Tech Mono',monospace; font-size:14px; outline:none; }
-.qual-jump input:focus { border-color:var(--acc); }
-.qual-dot { width:8px; height:8px; border-radius:50%; background:var(--brd2); display:inline-block; flex-shrink:0; }
-.qual-dot.filled { background:var(--acc); }
-.qual-dots { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:20px; max-width:600px; }
+.qual-dots { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:24px; }
+.qual-dot { width:12px; height:12px; background:var(--brd2); border-radius:2px; transition:all .2s; }
+.qual-dot.filled { background:var(--muted); }
+.qual-dot.red { background: var(--red) !important; box-shadow: 0 0 5px var(--red); }
+.qual-dot.blue { background: var(--blue) !important; box-shadow: 0 0 5px var(--blue); }
+.qual-dot.draw { background: var(--muted) !important; }
 
-.alliance-block { margin-bottom:20px; border-radius:0; }
-.alliance-header { padding:10px 16px; font-family:'Rajdhani',sans-serif; font-size:13px;
-  font-weight:700; letter-spacing:3px; text-transform:uppercase; display:flex; align-items:center; gap:12px; }
-.alliance-header.red  { background:rgba(220,38,38,.2);  color:#fca5a5; border-left:3px solid var(--red); }
-.alliance-header.blue { background:rgba(37,99,235,.2);  color:#93c5fd; border-left:3px solid var(--blue); }
-.alliance-overall { margin-left:auto; font-family:'Share Tech Mono',monospace; font-size:18px; }
-.alliance-overall.red  { color:#fca5a5; }
-.alliance-overall.blue { color:#93c5fd; }
+.qual-nav { display:flex; align-items:center; gap:12px; background:var(--surf); border:1px solid var(--brd); padding:12px 20px; margin-bottom:28px; }
+.qual-btn { background:var(--surf2); border:1px solid var(--brd2); color:var(--txt); padding:8px 16px; font-size:11px; font-weight:700; }
+.qual-btn:disabled { opacity:.3; }
+.qual-num-display { font-family:'Share Tech Mono',monospace; font-size:20px; font-weight:700; color:var(--acc); min-width:100px; text-align:center; }
+.qual-jump { display:flex; gap:6px; align-items:center; }
+.qual-jump input { background:#000; border:1px solid var(--brd2); color:#fff; padding:6px; width:50px; text-align:center; font-size:12px; }
+
+.alliance-block { margin-bottom:24px; border:1px solid var(--brd); }
+.alliance-header { padding:10px 16px; font-weight:700; font-size:12px; letter-spacing:1px; display:flex; justify-content:space-between; }
+.alliance-header.red { background:rgba(220,38,38,.1); color:var(--red); border-bottom:1px solid rgba(220,38,38,.2); }
+.alliance-header.blue { background:rgba(37,99,235,.1); color:var(--blue); border-bottom:1px solid rgba(37,99,235,.2); }
+.alliance-overall { font-family:'Share Tech Mono',monospace; font-size:14px; }
 
 .match-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--brd); }
 .match-robot { background:var(--surf); padding:14px 16px; }
-.match-robot-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-  color:var(--muted); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.match-robot-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
 .match-robot-label span { font-family:'Share Tech Mono',monospace; font-size:11px; }
 .match-fields { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
 .match-field { display:flex; flex-direction:column; gap:4px; }
 .match-field label { font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
 .match-notes { grid-column:1/-1; margin-top:8px; }
-.match-notes textarea { width:100%; background:#0a0a0a; border:1px solid #2a2a2a; color:var(--txt);
-  font-size:12px; padding:7px 10px; resize:none; height:54px; outline:none;
-  font-family:'Barlow',sans-serif; transition:border-color .2s; }
+.match-notes textarea { width:100%; background:#0a0a0a; border:1px solid #2a2a2a; color:var(--txt); font-size:12px; padding:7px 10px; resize:none; height:54px; outline:none; font-family:'Barlow',sans-serif; transition:border-color .2s; }
 .match-notes textarea:focus { border-color:var(--acc); }
 
-.team-select { width:100%; background:#0a0a0a; border:1px solid #2a2a2a; color:var(--txt);
-  font-size:12px; padding:7px 8px; outline:none; font-family:'Share Tech Mono',monospace;
-  transition:border-color .2s; appearance:none; cursor:pointer; }
+.team-select { width:100%; background:#0a0a0a; border:1px solid #2a2a2a; color:var(--txt); font-size:12px; padding:7px 8px; outline:none; font-family:'Share Tech Mono',monospace; transition:border-color .2s; appearance:none; cursor:pointer; }
 .team-select:focus { border-color:var(--acc); }
-.team-select.red-sel  { border-color:rgba(220,38,38,.4); }
-.team-select.blue-sel { border-color:rgba(37,99,235,.4); }
+.team-select.red-sel { border-color:rgba(220,38,38,.3); color:var(--red); }
+.team-select.blue-sel { border-color:rgba(37,99,235,.3); color:var(--blue); }
+
+.pit-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(64px, 1fr)); gap:6px; margin-bottom:28px; }
+.pit-cell { background:var(--surf); border:1px solid var(--brd); padding:10px 4px; text-align:center; cursor:pointer; transition:all .2s; position:relative; }
+.pit-cell:hover { background:var(--surf2); border-color:var(--brd2); }
+.pit-cell.on { border-color:var(--acc); background:rgba(220,38,38,.05); }
+.pit-cell.scouted { opacity:.6; }
+.pit-cell.scouted::after { content:""; position:absolute; top:3px; right:3px; width:5px; height:5px; background:var(--acc); border-radius:50%; }
+.pit-tn { font-family:'Share Tech Mono',monospace; font-size:14px; color:var(--txt); display:block; }
+.pit-pn { font-size:9px; color:var(--muted); display:block; margin-top:2px; }
+.pit-cell.on .pit-tn { color:var(--acc); }
+
+.photo-section { margin:24px 0; border:1px solid var(--brd); background:rgba(255,255,255,.01); padding:16px; }
+.photo-section-label { display:block; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+.photo-grid { display:flex; flex-wrap:wrap; gap:10px; }
+.photo-thumb { width:90px; height:90px; border:1px solid var(--brd2); position:relative; cursor:pointer; }
+.photo-thumb img { width:100%; height:100%; object-fit:cover; }
+.photo-thumb-del { position:absolute; top:-6px; right:-6px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; font-size:10px; display:flex; align-items:center; justify-content:center; }
+.photo-upload-btn { width:90px; height:90px; border:1px dashed var(--brd2); display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; gap:4px; color:var(--muted); }
+.photo-upload-btn:hover { border-color:var(--acc); color:var(--acc); }
+.photo-uploading { opacity:.5; pointer-events:none; }
+
+.lb-overlay { position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:1000; display:flex; align-items:center; justify-content:center; padding:40px; }
+.lb-close { position:absolute; top:24px; right:32px; font-size:32px; color:#fff; cursor:pointer; background:none; border:none; }
+.lb-img { max-width:100%; max-height:100%; object-fit:contain; box-shadow:0 0 50px rgba(0,0,0,.5); }
+.lb-nav { position:absolute; top:50%; width:100%; display:flex; justify-content:space-between; padding:0 30px; pointer-events:none; }
+.lb-nav button { pointer-events:auto; background:rgba(255,255,255,.1); border:none; color:#fff; width:50px; height:50px; font-size:24px; cursor:pointer; border-radius:50%; }
+
+.setup-box { background:#0a0a0a; border:1px solid #2a2a2a; padding:24px; margin-top:20px; }
+.setup-sql { background:#000; border:1px solid #1a1a1a; padding:16px; font-family:'Share Tech Mono',monospace; font-size:11px; color:#4ade80; white-space:pre-wrap; overflow-x:auto; margin-top:12px; line-height:1.5; }
 `;
 
-// ── Setup ──────────────────────────────────────────────────────────────────
+// ── Shared Logic ──────────────────────────────────────────────────────────
+
+function allianceOverall(robots) {
+  if (!robots || !robots.length) return 0;
+  return robots.reduce((sum, r) => {
+    return sum + (parseFloat(r.auto_climb)||0) + (parseFloat(r.auto_score)||0) + (parseFloat(r.teleop_score)||0) + (parseFloat(r.teleop_climb)||0);
+  }, 0).toFixed(1);
+}
+
+// ── Setup (Initial connection) ────────────────────────────────────────────
+
 function Setup({ onConnect }) {
-  const [url, setUrl] = useState(SUPABASE_URL !== "YOUR_SUPABASE_URL" ? SUPABASE_URL : "");
-  const [key, setKey] = useState(SUPABASE_ANON_KEY !== "YOUR_ANON_KEY" ? SUPABASE_ANON_KEY : "");
-  const [err, setErr] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (SUPABASE_URL !== "YOUR_SUPABASE_URL" && SUPABASE_ANON_KEY !== "YOUR_ANON_KEY")
-      onConnect(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }, []);
-
-  async function attempt() {
-    setErr(""); setLoading(true);
-    try {
-      const r = await fetch(`${url.trim()}/rest/v1/scouting?select=count&limit=1`, {
-        headers: { apikey: key.trim(), Authorization: `Bearer ${key.trim()}` }
-      });
-      if (r.status === 401) setErr("Geçersiz API key.");
-      else if (r.status === 404) setErr("Tablo bulunamadı — önce SQL'i çalıştır.");
-      else onConnect(url.trim(), key.trim());
-    } catch { setErr("Bağlantı başarısız — URL'yi kontrol et."); }
-    setLoading(false);
-  }
-
+  const [url, setUrl] = useState(SUPABASE_URL === "YOUR_SUPABASE_URL" ? "" : SUPABASE_URL);
+  const [key, setKey] = useState(SUPABASE_ANON_KEY === "YOUR_ANON_KEY" ? "" : SUPABASE_ANON_KEY);
   return (
     <div className="lw"><style>{CSS}</style><div className="lgrid" />
-      <div className="lcard" style={{width:520}}>
-        <div className="llogo"><TorchersLogo size={44}/><div>
-          <div className="ltag">SETUP · ONE TIME</div>
-          <TorchersText height={26} color="#ffffff" />
-        </div></div>
-        <p style={{fontSize:13,color:"var(--muted)",marginBottom:22,lineHeight:1.7}}>
-          Supabase → <strong style={{color:"var(--txt)"}}>Project Settings → API</strong>
-        </p>
-        <label className="lbl">Project URL</label>
-        <input className="inp" style={{marginBottom:14}} value={url} onChange={e=>setUrl(e.target.value)} placeholder="https://xxxx.supabase.co" />
-        <label className="lbl">Anon Public Key</label>
-        <input className="inp" value={key} onChange={e=>setKey(e.target.value)} placeholder="eyJhbGci..." />
-        <button className="btn-main" onClick={attempt} disabled={!url||!key||loading}>{loading?"BAĞLANIYOR…":"BAĞLAN"}</button>
-        {err && <div className="err">{err}</div>}
-        <div style={{marginTop:20}}>
-          <div style={{fontSize:10,fontWeight:700,letterSpacing:2,color:"var(--acc)",marginBottom:8}}>SUPABASE SQL EDITOR'DA ÇALIŞTIR</div>
+      <div className="lcard" style={{width:600}}>
+        <div className="llogo"><TorchersLogo size={56}/><div><div className="ltag">DATABASE SETUP</div><TorchersText height={38} color="#ffffff" /></div></div>
+        <p className="lsub">Uygulamayı başlatmak için Supabase bağlantı bilgilerini girin.</p>
+        <div style={{display:"grid",gap:16,marginBottom:24}}>
+          <div><label className="lbl">Supabase URL</label><input className="inp" value={url} onChange={e=>setUrl(e.target.value)} placeholder="https://xxx.supabase.co" /></div>
+          <div><label className="lbl">Anon Public Key</label><input className="inp" value={key} onChange={e=>setKey(e.target.value)} placeholder="eyJhbG..." /></div>
+        </div>
+        <button className="btn-main" onClick={() => onConnect(url, key)} disabled={!url || !key}>BAĞLAN VE DEVAM ET</button>
+        <div className="setup-box">
+          <label className="lbl">Veritabanı Tablo Kurulumu (SQL Editor'da çalıştır)</label>
           <div className="setup-sql">{`CREATE TABLE IF NOT EXISTS scouting (
   id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  team_number int NOT NULL UNIQUE, team_name text, pit_number int,
-  performance text, scoring text, shooter_type text,
-  intake_type text, climb text, capacity text, notes text,
+  team_number int NOT NULL UNIQUE,
+  team_name text, pit_number int,
+  performance text, scoring text,
+  shooter_type text, intake_type text,
+  climb text, capacity text, notes text,
   updated_at timestamptz DEFAULT now()
 );
+
 CREATE TABLE IF NOT EXISTS match_scouting (
   id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   qual_number int NOT NULL,
@@ -466,6 +384,7 @@ CREATE TABLE IF NOT EXISTS match_scouting (
   updated_at timestamptz DEFAULT now(),
   UNIQUE(qual_number, alliance, robot_slot)
 );
+
 ALTER TABLE scouting ENABLE ROW LEVEL SECURITY;
 ALTER TABLE match_scouting ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "open" ON scouting FOR ALL USING (true) WITH CHECK (true);
@@ -482,10 +401,14 @@ CREATE POLICY "open" ON match_scouting FOR ALL USING (true) WITH CHECK (true);
 }
 
 // ── Login ──────────────────────────────────────────────────────────────────
+
 function Login({ onLogin }) {
   const [pw, setPw] = useState("");
   const [err, setErr] = useState("");
-  const go = () => { if (pw === TEAM_PASSWORD) onLogin(); else { setErr("Yanlış şifre."); setPw(""); } };
+  const go = () => {
+    if (pw === TEAM_PASSWORD) onLogin();
+    else { setErr("Yanlış şifre."); setPw(""); }
+  };
   return (
     <div className="lw"><style>{CSS}</style><div className="lgrid" />
       <div className="lcard">
@@ -498,9 +421,7 @@ function Login({ onLogin }) {
         </div>
         <div className="lsub">Team 10415 — Internal Scouting Platform</div>
         <label className="lbl">Team Password</label>
-        <input className="inp" type="password" value={pw}
-          onChange={e=>{setPw(e.target.value);setErr("")}}
-          onKeyDown={e=>e.key==="Enter"&&go()} placeholder="Şifreyi gir…" />
+        <input className="inp" type="password" value={pw} onChange={e=>{setPw(e.target.value);setErr("")}} onKeyDown={e=>e.key==="Enter"&&go()} placeholder="Şifreyi gir…" />
         <button className="btn-main" onClick={go} disabled={!pw}>GİRİŞ YAP</button>
         {err && <div className="err">{err}</div>}
       </div>
@@ -509,46 +430,47 @@ function Login({ onLogin }) {
 }
 
 // ── Lightbox ──────────────────────────────────────────────────────────────
+
 function Lightbox({ urls, startIndex, onClose }) {
   const [idx, setIdx] = useState(startIndex);
   useEffect(() => {
-    const handler = e => { if(e.key==="Escape") onClose(); if(e.key==="ArrowLeft") setIdx(i=>Math.max(0,i-1)); if(e.key==="ArrowRight") setIdx(i=>Math.min(urls.length-1,i+1)); };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    const h = e => { if(e.key==="Escape") onClose(); if(e.key==="ArrowRight") setIdx(p=>(p+1)%urls.length); if(e.key==="ArrowLeft") setIdx(p=>(p-1+urls.length)%urls.length); };
+    window.addEventListener("keydown", h); return () => window.removeEventListener("keydown", h);
   }, [urls.length, onClose]);
   return (
-    <div className="lightbox" onClick={onClose}>
-      <button className="lightbox-close" onClick={onClose}>✕</button>
-      {idx > 0 && <button className="lightbox-prev" onClick={e=>{e.stopPropagation();setIdx(i=>i-1)}}>‹</button>}
-      <img className="lightbox-img" src={urls[idx]} alt="" onClick={e=>e.stopPropagation()} />
-      {idx < urls.length-1 && <button className="lightbox-next" onClick={e=>{e.stopPropagation();setIdx(i=>i+1)}}>›</button>}
-      <div className="lightbox-counter">{idx+1} / {urls.length}</div>
+    <div className="lb-overlay" onClick={onClose}>
+      <button className="lb-close">×</button>
+      <img src={urls[idx]} className="lb-img" alt="" onClick={e=>e.stopPropagation()} />
+      {urls.length > 1 && (
+        <div className="lb-nav">
+          <button onClick={e=>{e.stopPropagation(); setIdx((idx-1+urls.length)%urls.length)}}>◀</button>
+          <button onClick={e=>{e.stopPropagation(); setIdx((idx+1)%urls.length)}}>▶</button>
+        </div>
+      )}
     </div>
   );
 }
 
-// ── PhotoSection ───────────────────────────────────────────────────────────
+// ── Photo Upload ──────────────────────────────────────────────────────────
+
 function PhotoSection({ teamNumber, supabaseUrl, supabaseKey }) {
   const [photos, setPhotos] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [lightbox, setLightbox] = useState(null);
-
-  const storageBase = `${supabaseUrl}/storage/v1`;
-  const headers = { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` };
+  
   const bucket = "robot-photos";
-  const prefix = `team-${teamNumber}/`;
+  const prefix = `${teamNumber}/`;
+  const storageBase = `${supabaseUrl}/storage/v1`;
+  const headers = { "apikey": supabaseKey, "Authorization": `Bearer ${supabaseKey}` };
 
-  useEffect(() => {
-    if (!teamNumber) return;
-    loadPhotos();
-  }, [teamNumber]);
+  useEffect(() => { loadPhotos(); }, [teamNumber]);
 
   async function loadPhotos() {
     try {
       const r = await fetch(`${storageBase}/object/list/${bucket}`, {
         method: "POST",
         headers: { ...headers, "Content-Type": "application/json" },
-        body: JSON.stringify({ prefix, limit: 8, offset: 0 }),
+        body: JSON.stringify({ prefix, limit: 10, offset: 0 }),
       });
       const files = await r.json();
       if (!Array.isArray(files)) return;
@@ -563,6 +485,7 @@ function PhotoSection({ teamNumber, supabaseUrl, supabaseKey }) {
     const files = Array.from(e.target.files||[]);
     if (!files.length) return;
     if (photos.length + files.length > 8) { alert("Maksimum 8 fotoğraf yüklenebilir!"); return; }
+    
     setUploading(true);
     for (const file of files) {
       const ext = file.name.split(".").pop();
@@ -616,6 +539,7 @@ function PhotoSection({ teamNumber, supabaseUrl, supabaseKey }) {
 }
 
 // ── Pit Scout ─────────────────────────────────────────────────────────────
+
 function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
   const [sel, setSel] = useState(null);
   const [scoutedSet, setScoutedSet] = useState(new Set());
@@ -632,278 +556,269 @@ function ScoutForm({ api, supabaseUrl, supabaseKey, onSaved }) {
   }, [api]);
 
   async function pick(t) {
-    setSel(t); setStatus(null);
+    setSel(t);
+    setStatus(null);
     try {
       const [scoutRes, matchRes] = await Promise.all([
         api(`/scouting?team_number=eq.${t.team}&select=*`),
-        api(`/match_scouting?team_number=eq.${t.team}&select=*&order=qual_number.asc`),
+        api(`/match_scouting?team_number=eq.${t.team}&select=*&order=qual_number.asc`)
       ]);
-      const sd = await scoutRes.json();
-      const md = await matchRes.json();
-      if (sd?.[0]) {
-        const s = sd[0];
-        setForm({ performance:s.performance||"", scoring:s.scoring||"", shooter_type:s.shooter_type||"",
-          intake_type:s.intake_type||"", climb:s.climb||"", capacity:s.capacity||"", notes:s.notes||"" });
-        setExistingId(s.id);
-      } else { setForm(BLANK_PIT); setExistingId(null); }
-      setMatchHistory(Array.isArray(md) ? md : []);
-    } catch { setForm(BLANK_PIT); setExistingId(null); setMatchHistory([]); }
+      const sData = await scoutRes.json();
+      const mData = await matchRes.json();
+      
+      if (sData && sData[0]) {
+        const { id, team_number, team_name, pit_number, updated_at, ...fields } = sData[0];
+        setForm(fields);
+        setExistingId(id);
+      } else {
+        setForm(BLANK_PIT);
+        setExistingId(null);
+      }
+      setMatchHistory(Array.isArray(mData) ? mData : []);
+    } catch {
+      setForm(BLANK_PIT);
+      setExistingId(null);
+      setMatchHistory([]);
+    }
   }
 
   async function save() {
     setStatus("saving");
-    const payload = { team_number:sel.team, team_name:sel.name, pit_number:sel.pit, ...form, updated_at:new Date().toISOString() };
     try {
-      const r = await api(`/scouting?on_conflict=team_number`, { method:"POST", body:JSON.stringify(payload), prefer:"resolution=merge-duplicates,return=representation" });
-      if (!r.ok) throw new Error();
-      setExistingId(true); setStatus("saved");
+      const payload = { ...form, team_number: sel.team, team_name: sel.name, pit_number: sel.pit };
+      const r = await api("/scouting", {
+        method: existingId ? "PATCH" : "POST",
+        body: JSON.stringify(payload),
+        ...(existingId ? { prefer: "return=representation", extraHeaders: { "Range-Unit": "items" }, pathSuffix: `?id=eq.${existingId}` } : {})
+      });
+      // Handle PATCH path differently if needed by custom api wrapper
+      if (existingId) {
+        await api(`/scouting?id=eq.${existingId}`, { method: "PATCH", body: JSON.stringify(payload) });
+      }
+      
       setScoutedSet(prev => new Set([...prev, sel.team]));
-      onSaved();
+      setStatus("saved");
+      onSaved && onSaved();
     } catch { setStatus("error"); }
   }
 
   async function clearData() {
-    if (!existingId) { setForm(BLANK_PIT); setStatus(null); return; }
+    if (!existingId) return setForm(BLANK_PIT);
+    if (!confirm("Bu takımın pit verilerini silmek istediğinize emin misiniz?")) return;
     setStatus("clearing");
     try {
-      const r = await api(`/scouting?team_number=eq.${sel.team}`, { method:"DELETE", prefer:"" });
-      if (!r.ok) throw new Error();
-      setForm(BLANK_PIT); setExistingId(null); setStatus("cleared");
+      await api(`/scouting?id=eq.${existingId}`, { method: "DELETE" });
       setScoutedSet(prev => { const s = new Set(prev); s.delete(sel.team); return s; });
-      onSaved();
+      setForm(BLANK_PIT);
+      setExistingId(null);
+      setStatus(null);
     } catch { setStatus("error"); }
   }
 
-  const f = k => v => setForm(p=>({...p,[k]:v}));
-
-  // sorted by pit number
-  const sortedTeams = [...TEAMS].sort((a,b) => a.pit - b.pit);
-
-  if (!sel) {
-    // ── PIT GRID ──
-    const scouted = scoutedSet.size;
-    return (
-      <div>
-        <div className="ph">
-          <h2>Pit Scouting</h2>
-          <p>Bir pit seç — <span style={{color:"var(--acc)"}}>{scouted}</span> / {TEAMS.length} tamamlandı</p>
-        </div>
-        <div className="pit-grid">
-          {sortedTeams.map(t => {
-            const done = scoutedSet.has(t.team);
-            return (
-              <div key={t.team} className={`pit-card ${done?"pit-done":"pit-empty"}`} onClick={() => pick(t)}>
-                <div className="pit-num">PIT {t.pit}</div>
-                <div className="pit-team">#{t.team}</div>
-                <div className="pit-name">{t.name}</div>
-                {done && <div className="pit-check">✓</div>}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  // ── TEAM PROFILE ──
-  const matchScore = matchHistory.reduce((sum,r) =>
-    sum + (parseFloat(r.auto_climb)||0) + (parseFloat(r.auto_score)||0) +
-          (parseFloat(r.teleop_score)||0) + (parseFloat(r.teleop_climb)||0), 0);
-  const avgMatchScore = matchHistory.length ? (matchScore / matchHistory.length).toFixed(1) : null;
+  const f = (k) => (v) => setForm(p => ({...p, [k]: v}));
 
   return (
     <div>
-      {/* Header */}
-      <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:24}}>
-        <button onClick={()=>{setSel(null);setForm(BLANK_PIT);setStatus(null)}} style={{
-          padding:"8px 16px", background:"none", border:"1px solid var(--brd2)", color:"var(--muted)",
-          fontSize:12, fontWeight:600, letterSpacing:1, textTransform:"uppercase", cursor:"pointer", transition:"all .2s",
-        }}
-          onMouseEnter={e=>e.target.style.borderColor="#dc2626"}
-          onMouseLeave={e=>e.target.style.borderColor="var(--brd2)"}
-        >← Geri</button>
-        <div style={{flex:1}}>
-          <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:22,color:"var(--acc)"}}>#{sel.team}</span>
-            <span style={{fontFamily:"'Rajdhani',sans-serif",fontSize:24,fontWeight:700}}>{sel.name}</span>
-            {existingId && <span style={{fontSize:11,color:"var(--acc)",background:"rgba(220,38,38,.15)",padding:"2px 8px"}}>✓ SCOUTED</span>}
+      <div className="ph"><h2>Pit Scouting</h2><p>Takımların teknik özelliklerini ve hazırlık durumlarını kaydet</p></div>
+      
+      <div className="pit-grid">
+        {TEAMS.map(t => (
+          <div key={t.team} className={`pit-cell ${sel?.team===t.team?"on":""} ${scoutedSet.has(t.team)?"scouted":""}`} onClick={()=>pick(t)}>
+            <span className="pit-tn">{t.team}</span>
+            <span className="pit-pn">P{t.pit}</span>
           </div>
-          <div style={{fontSize:12,color:"var(--muted)",marginTop:2}}>Pit {sel.pit} · {sel.from}</div>
-        </div>
-        {avgMatchScore && (
-          <div style={{textAlign:"right"}}>
-            <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:22,color:"var(--acc)"}}>{avgMatchScore}</div>
-            <div style={{fontSize:10,color:"var(--muted)",letterSpacing:1}}>MATCH AVG</div>
-          </div>
-        )}
-      </div>
-
-      {/* Pit Score summary if scouted */}
-      {existingId && (
-        <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:18}}>
-          {[["Performance",form.performance],["Scoring",form.scoring],["Climb",form.climb],
-            ["Shooter",form.shooter_type],["Intake",form.intake_type],["Capacity",form.capacity]
-          ].filter(([,v])=>v).map(([k,v])=>(
-            <div key={k} style={{background:"var(--surf)",border:"1px solid var(--brd2)",padding:"5px 12px"}}>
-              <div style={{fontSize:9,color:"var(--muted)",letterSpacing:1,textTransform:"uppercase"}}>{k}</div>
-              <div style={{fontSize:13,color:"var(--acc)",fontWeight:600,marginTop:2}}>{v}</div>
-            </div>
-          ))}
-          <div style={{background:"rgba(220,38,38,.1)",border:"1px solid var(--acc)",padding:"5px 14px"}}>
-            <div style={{fontSize:9,color:"var(--muted)",letterSpacing:1,textTransform:"uppercase"}}>PIT SCORE</div>
-            <div style={{fontSize:18,color:"var(--acc)",fontFamily:"'Share Tech Mono',monospace",fontWeight:700}}>{totalPitScore(form)}/16</div>
-          </div>
-        </div>
-      )}
-
-      {/* Match history */}
-      {matchHistory.length > 0 && (
-        <div style={{marginBottom:24}}>
-          <div style={{fontSize:10,fontWeight:700,letterSpacing:2,color:"var(--muted)",textTransform:"uppercase",marginBottom:10}}>
-            Match Geçmişi — {matchHistory.length} maç
-          </div>
-          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-            {matchHistory.map(m => {
-              const s = (parseFloat(m.auto_climb)||0)+(parseFloat(m.auto_score)||0)+(parseFloat(m.teleop_score)||0)+(parseFloat(m.teleop_climb)||0);
-              const allianceColor = m.alliance==="red" ? "#fca5a5" : "#93c5fd";
-              return (
-                <div key={m.id} style={{background:"var(--surf)",border:`1px solid ${m.alliance==="red"?"rgba(220,38,38,.3)":"rgba(37,99,235,.3)"}`,padding:"8px 12px",minWidth:80}}>
-                  <div style={{fontSize:10,color:allianceColor,fontWeight:700,letterSpacing:1}}>QUAL {m.qual_number}</div>
-                  <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:18,color:"var(--txt)",margin:"4px 0"}}>{s}</div>
-                  <div style={{fontSize:9,color:"var(--muted)"}}>
-                    {m.auto_score||0}+{m.auto_climb||0} / {m.teleop_score||0}+{m.teleop_climb||0}
-                  </div>
-                  {m.notes && <div style={{fontSize:10,color:"var(--muted)",marginTop:4,maxWidth:100,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}} title={m.notes}>{m.notes}</div>}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* Photos */}
-      <PhotoSection teamNumber={sel.team} supabaseUrl={supabaseUrl} supabaseKey={supabaseKey} />
-
-      {/* Pit scout form */}
-      <div style={{fontSize:10,fontWeight:700,letterSpacing:2,color:"var(--muted)",textTransform:"uppercase",marginBottom:14,marginTop:8}}>
-        Pit Scout Formu
-      </div>
-      <div className="fgrid">
-        {[["Performance","performance",PERF_OPTS],["Scoring","scoring",SCORE_OPTS],
-          ["Shooter Type","shooter_type",SHOOTER_OPTS],["Intake Type","intake_type",INTAKE_OPTS],
-          ["Climb","climb",CLIMB_OPTS],["Capacity","capacity",CAP_OPTS]].map(([lbl,key,opts])=>(
-          <div className="fg" key={key}><label>{lbl}</label><RadioGroup options={opts} value={form[key]} onChange={f(key)} /></div>
         ))}
       </div>
-      <label className="lbl">Notes</label>
-      <textarea className="inp" value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} placeholder="Gözlemler, strateji notları…" />
-      <div className="srow">
-        <button className="btn-save" onClick={save} disabled={status==="saving"||status==="clearing"}>
-          {status==="saving"?"KAYDEDİLİYOR…":existingId?"GÜNCELLE":"KAYDET"}
-        </button>
-        <button onClick={clearData} disabled={status==="saving"||status==="clearing"} style={{
-          padding:"10px 16px",background:"none",border:"1px solid #2a2a2a",color:"#64748b",
-          fontSize:12,fontWeight:600,letterSpacing:1,textTransform:"uppercase",cursor:"pointer",transition:"all .2s"
-        }}
-          onMouseEnter={e=>{e.target.style.borderColor="#ef4444";e.target.style.color="#f87171"}}
-          onMouseLeave={e=>{e.target.style.borderColor="#2a2a2a";e.target.style.color="#64748b"}}
-        >
-          {status==="clearing"?"SİLİNİYOR…":"✕ TEMİZLE"}
-        </button>
-        {status==="saved"   && <span className="sok">✓ Kaydedildi!</span>}
-        {status==="cleared" && <span style={{fontSize:13,color:"#94a3b8"}}>✓ Temizlendi</span>}
-        {status==="error"   && <span className="serr">✗ Hata</span>}
-      </div>
+
+      {sel && (
+        <div className="rcard" style={{padding:24, borderTop:"4px solid var(--acc)"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:20}}>
+            <div>
+              <div style={{fontSize:11,fontWeight:700,color:var(--muted),textTransform:"uppercase",letterSpacing:1}}>{sel.from}</div>
+              <h3 style={{fontSize:24,fontFamily:"'Rajdhani',sans-serif"}}>{sel.name} <span style={{color:var(--acc)}}>#{sel.team}</span></h3>
+            </div>
+            <div style={{textAlign:"right"}}>
+              <div style={{fontSize:10,color:var(--muted)}}>PIT NUMBER</div>
+              <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:20,color:var(--acc)}}>{sel.pit}</div>
+            </div>
+          </div>
+
+          {/* Match History */}
+          {matchHistory.length > 0 && (
+            <div style={{marginBottom:24, padding:16, background:"rgba(0,0,0,.2)", border:"1px solid var(--brd)"}}>
+              <div style={{fontSize:10,fontWeight:700,letterSpacing:1,color:var(--muted),textTransform:"uppercase",marginBottom:10}}>Maç Geçmişi</div>
+              <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:8}}>
+                {matchHistory.map(m => {
+                  const s = (parseFloat(m.auto_score)||0) + (parseFloat(m.auto_climb)||0) + (parseFloat(m.teleop_score)||0) + (parseFloat(m.teleop_climb)||0);
+                  return (
+                    <div key={m.id} style={{minWidth:80, background:m.alliance==="red"?"rgba(220,38,38,.1)":"rgba(37,99,235,.1)", padding:8, border:"1px solid "+(m.alliance==="red"?"rgba(220,38,38,.2)":"rgba(37,99,235,.2)")}}>
+                      <div style={{fontSize:9,fontWeight:700,color:var(--muted)}}>Q{m.qual_number}</div>
+                      <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:18,color:"var(--txt)",margin:"4px 0"}}>{s}</div>
+                      <div style={{fontSize:9,color:"var(--muted)"}}>
+                        {m.auto_score||0}+{m.auto_climb||0} / {m.teleop_score||0}+{m.teleop_climb||0}
+                      </div>
+                      {m.notes && <div style={{fontSize:10,color:"var(--muted)",marginTop:4,maxWidth:100,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}} title={m.notes}>{m.notes}</div>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Photos */}
+          <PhotoSection teamNumber={sel.team} supabaseUrl={supabaseUrl} supabaseKey={supabaseKey} />
+
+          {/* Pit scout form */}
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:2,color:"var(--muted)",textTransform:"uppercase",marginBottom:14,marginTop:8}}> Pit Scout Formu </div>
+          <div className="fgrid">
+            {[["Performance","performance",PERF_OPTS],["Scoring","scoring",SCORE_OPTS],
+              ["Shooter Type","shooter_type",SHOOTER_OPTS],["Intake Type","intake_type",INTAKE_OPTS],
+              ["Climb","climb",CLIMB_OPTS],["Capacity","capacity",CAP_OPTS]].map(([lbl,key,opts])=>(
+              <div className="fg" key={key}><label>{lbl}</label><RadioGroup options={opts} value={form[key]} onChange={f(key)} /></div>
+            ))}
+          </div>
+
+          <label className="lbl">Notes</label>
+          <textarea className="inp" value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} placeholder="Gözlemler, strateji notları…" />
+          
+          <div className="srow">
+            <button className="btn-save" onClick={save} disabled={status==="saving"||status==="clearing"}>
+              {status==="saving"?"KAYDEDİLİYOR…":existingId?"GÜNCELLE":"KAYDET"}
+            </button>
+            <button onClick={clearData} disabled={status==="saving"||status==="clearing"} style={{
+              padding:"10px 16px",background:"none",border:"1px solid #2a2a2a",color:"#64748b",
+              fontSize:12,fontWeight:600,letterSpacing:1,textTransform:"uppercase",cursor:"pointer",transition:"all .2s"
+            }} onMouseEnter={e=>{e.target.style.borderColor="#ef4444";e.target.style.color="#f87171"}} onMouseLeave={e=>{e.target.style.borderColor="#2a2a2a";e.target.style.color="#64748b"}} >
+              {status==="clearing"?"SİLİNİYOR…":"✕ TEMİZLE"}
+            </button>
+            {status==="saved" && <span className="sok">✓ Kaydedildi</span>}
+            {status==="error" && <span className="serr">✗ Hata!</span>}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-// ── Match Scouting ────────────────────────────────────────────────────────
-const BLANK_ROBOT = { team_number:"", auto_climb:"", auto_score:"", teleop_score:"", teleop_climb:"", notes:"" };
+// ── Match Scout ───────────────────────────────────────────────────────────
 
-function allianceOverall(robots) {
-  return robots.reduce((sum, r) => {
-    return sum + (parseFloat(r.auto_climb)||0) + (parseFloat(r.auto_score)||0) +
-                 (parseFloat(r.teleop_score)||0) + (parseFloat(r.teleop_climb)||0);
-  }, 0);
-}
-
-function MatchScouting({ api, onSaved }) {
+function MatchScout({ api, onSaved }) {
   const [qual, setQual] = useState(1);
-  const [jumpVal, setJumpVal] = useState("");
-  const [matchData, setMatchData] = useState({});
+  const [matchData, setMatchData] = useState([]);
   const [savedQuals, setSavedQuals] = useState(new Set());
+  const [winners, setWinners] = useState({}); // Kazananlar sözlüğü
   const [status, setStatus] = useState(null);
+  const [jumpVal, setJumpVal] = useState("");
   const [loadedQuals, setLoadedQuals] = useState({});
 
-  // Load all saved quals list
   useEffect(() => {
-    api("/match_scouting?select=qual_number").then(r=>r.json()).then(d=>{
-      if (Array.isArray(d)) setSavedQuals(new Set(d.map(x=>x.qual_number)));
-    }).catch(()=>{});
+    async function load() {
+      try {
+        const r = await api(`/match_scouting?select=qual_number,alliance,auto_score,auto_climb,teleop_score,teleop_climb`);
+        const data = await r.json();
+        const qSet = new Set();
+        const matchGroups = {};
+        const qualResults = {};
+
+        data.forEach(d => {
+          qSet.add(d.qual_number);
+          if (!matchGroups[d.qual_number]) matchGroups[d.qual_number] = { red: 0, blue: 0 };
+          const total = (parseFloat(d.auto_score)||0) + (parseFloat(d.auto_climb)||0) + (parseFloat(d.teleop_score)||0) + (parseFloat(d.teleop_climb)||0);
+          matchGroups[d.qual_number][d.alliance] += total;
+        });
+
+        Object.keys(matchGroups).forEach(q => {
+          const scores = matchGroups[q];
+          if (scores.red > scores.blue) qualResults[q] = "red";
+          else if (scores.blue > scores.red) qualResults[q] = "blue";
+          else qualResults[q] = "draw";
+        });
+
+        setWinners(qualResults);
+        setSavedQuals(qSet);
+      } catch {}
+    }
+    load();
   }, [api]);
 
-  // Load current qual data
   useEffect(() => {
-    if (loadedQuals[qual]) {
-      setMatchData(loadedQuals[qual]);
-      return;
+    async function loadQual() {
+      setStatus(null);
+      if (loadedQuals[qual]) return setMatchData(loadedQuals[qual]);
+      try {
+        const r = await api(`/match_scouting?qual_number=eq.${qual}`);
+        const data = await r.json();
+        if (data && data.length > 0) {
+          setMatchData(data);
+          setLoadedQuals(p => ({...p, [qual]: data}));
+        } else {
+          const empty = [1,2,3].flatMap(s => [
+            {qual_number:qual, alliance:"red", robot_slot:s, team_number:null, auto_climb:0, auto_score:0, teleop_score:0, teleop_climb:0, notes:""},
+            {qual_number:qual, alliance:"blue", robot_slot:s, team_number:null, auto_climb:0, auto_score:0, teleop_score:0, teleop_climb:0, notes:""}
+          ]);
+          setMatchData(empty);
+        }
+      } catch {
+        setMatchData([]);
+      }
     }
-    api(`/match_scouting?qual_number=eq.${qual}&select=*`).then(r=>r.json()).then(rows=>{
-      if (!Array.isArray(rows) || rows.length===0) { setMatchData({}); return; }
-      const d = {};
-      rows.forEach(row => { d[`${row.alliance}_${row.robot_slot}`] = { ...row }; });
-      setMatchData(d);
-      setLoadedQuals(prev => ({...prev, [qual]: d}));
-    }).catch(()=>{});
-  }, [qual, api]);
+    loadQual();
+  }, [qual, api, loadedQuals]);
 
-  function getRobot(alliance, slot) {
-    return matchData[`${alliance}_${slot}`] || { ...BLANK_ROBOT };
-  }
+  const getRobot = (alliance, slot) => matchData.find(d => d.alliance === alliance && d.robot_slot === slot) || {};
+  const getAllianceRobots = (alliance) => matchData.filter(d => d.alliance === alliance);
 
-  function setRobot(alliance, slot, field, value) {
-    const key = `${alliance}_${slot}`;
-    setMatchData(prev => ({ ...prev, [key]: { ...(prev[key]||BLANK_ROBOT), [field]:value } }));
-  }
-
-  function getAllianceRobots(alliance) {
-    return [1,2,3].map(s => getRobot(alliance, s));
-  }
+  const updateRobot = (alliance, slot, key, val) => {
+    setMatchData(prev => prev.map(d => (d.alliance === alliance && d.robot_slot === slot) ? {...d, [key]: val} : d));
+  };
 
   async function saveQual() {
     setStatus("saving");
     try {
-      const rows = [];
-      for (const alliance of ["red","blue"]) {
-        for (const slot of [1,2,3]) {
-          const r = getRobot(alliance, slot);
-          rows.push({
-            qual_number: qual, alliance, robot_slot: slot,
-            team_number: r.team_number ? parseInt(r.team_number) : null,
-            auto_climb: parseFloat(r.auto_climb)||0,
-            auto_score: parseFloat(r.auto_score)||0,
-            teleop_score: parseFloat(r.teleop_score)||0,
-            teleop_climb: parseFloat(r.teleop_climb)||0,
-            notes: r.notes||"",
-            updated_at: new Date().toISOString(),
-          });
+      // Upsert logic
+      for (const robot of matchData) {
+        const { id, updated_at, ...payload } = robot;
+        if (id) {
+          await api(`/match_scouting?id=eq.${id}`, { method: "PATCH", body: JSON.stringify(payload) });
+        } else {
+          await api("/match_scouting", { method: "POST", body: JSON.stringify(payload) });
         }
       }
-      const r = await api(`/match_scouting?on_conflict=qual_number,alliance,robot_slot`, {
-        method:"POST", body:JSON.stringify(rows),
-        prefer:"resolution=merge-duplicates,return=representation",
-      });
-      if (!r.ok) throw new Error();
       setSavedQuals(prev => new Set([...prev, qual]));
+      // Kazananı anlık hesapla
+      const redTotal = getAllianceRobots("red").reduce((s,r) => s + (parseFloat(r.auto_score)||0)+(parseFloat(r.auto_climb)||0)+(parseFloat(r.teleop_score)||0)+(parseFloat(r.teleop_climb)||0), 0);
+      const blueTotal = getAllianceRobots("blue").reduce((s,r) => s + (parseFloat(r.auto_score)||0)+(parseFloat(r.auto_climb)||0)+(parseFloat(r.teleop_score)||0)+(parseFloat(r.teleop_climb)||0), 0);
+      setWinners(prev => ({...prev, [qual]: redTotal > blueTotal ? "red" : blueTotal > redTotal ? "blue" : "draw"}));
+      
       setLoadedQuals(prev => ({...prev, [qual]: matchData}));
-      setStatus("saved"); onSaved && onSaved();
+      setStatus("saved");
+      onSaved && onSaved();
     } catch { setStatus("error"); }
   }
 
-  const redRobots  = getAllianceRobots("red");
+  async function deleteQual() {
+    if (!confirm(`Qual ${qual} verilerini tamamen silmek istediğinize emin misiniz?`)) return;
+    setStatus("saving");
+    try {
+      const r = await api(`/match_scouting?qual_number=eq.${qual}`, { method: "DELETE" });
+      if (!r.ok) throw new Error();
+      
+      setSavedQuals(prev => { const s = new Set(prev); s.delete(qual); return s; });
+      setWinners(prev => { const w = {...prev}; delete w[qual]; return w; });
+      setLoadedQuals(prev => { const l = {...prev}; delete l[qual]; return l; });
+      
+      const empty = [1,2,3].flatMap(s => [
+        {qual_number:qual, alliance:"red", robot_slot:s, team_number:null, auto_climb:0, auto_score:0, teleop_score:0, teleop_climb:0, notes:""},
+        {qual_number:qual, alliance:"blue", robot_slot:s, team_number:null, auto_climb:0, auto_score:0, teleop_score:0, teleop_climb:0, notes:""}
+      ]);
+      setMatchData(empty);
+      setStatus(null);
+    } catch { setStatus("error"); }
+  }
+
+  const redRobots = getAllianceRobots("red");
   const blueRobots = getAllianceRobots("blue");
-  const redOverall  = allianceOverall(redRobots);
+  const redOverall = allianceOverall(redRobots);
   const blueOverall = allianceOverall(blueRobots);
 
   return (
@@ -913,8 +828,13 @@ function MatchScouting({ api, onSaved }) {
       {/* Qual dots */}
       <div className="qual-dots">
         {Array.from({length:TOTAL_QUALS},(_,i)=>(
-          <div key={i+1} className={`qual-dot ${savedQuals.has(i+1)?"filled":""}`}
-            title={`Qual ${i+1}`} style={{cursor:"pointer"}} onClick={()=>setQual(i+1)} />
+          <div 
+            key={i+1} 
+            className={`qual-dot ${savedQuals.has(i+1)?"filled":""} ${winners[i+1] || ""}`} 
+            title={`Qual ${i+1}`} 
+            style={{cursor:"pointer", background: winners[i+1] === 'red' ? 'var(--red)' : winners[i+1] === 'blue' ? 'var(--blue)' : undefined}} 
+            onClick={()=>setQual(i+1)} 
+          />
         ))}
       </div>
 
@@ -923,12 +843,16 @@ function MatchScouting({ api, onSaved }) {
         <button className="qual-btn" onClick={()=>setQual(q=>Math.max(1,q-1))} disabled={qual<=1}>◀ PREV</button>
         <div className="qual-num-display">QUAL {qual}</div>
         <button className="qual-btn" onClick={()=>setQual(q=>Math.min(TOTAL_QUALS,q+1))} disabled={qual>=TOTAL_QUALS}>NEXT ▶</button>
+        
         <div className="qual-jump">
-          <input value={jumpVal} onChange={e=>setJumpVal(e.target.value)} placeholder="No" type="number" min="1" max={TOTAL_QUALS}
-            onKeyDown={e=>{if(e.key==="Enter"){const n=parseInt(jumpVal);if(n>=1&&n<=TOTAL_QUALS){setQual(n);setJumpVal("");}}}} />
+          <input value={jumpVal} onChange={e=>setJumpVal(e.target.value)} placeholder="No" type="number" min="1" max={TOTAL_QUALS} onKeyDown={e=>{if(e.key==="Enter"){const n=parseInt(jumpVal);if(n>=1&&n<=TOTAL_QUALS){setQual(n);setJumpVal("");}}}} />
           <button className="qual-btn" onClick={()=>{const n=parseInt(jumpVal);if(n>=1&&n<=TOTAL_QUALS){setQual(n);setJumpVal("");}}}>GİT</button>
         </div>
+
         <div style={{marginLeft:"auto",display:"flex",gap:10,alignItems:"center"}}>
+          {savedQuals.has(qual) && (
+            <button className="sbtn" onClick={deleteQual} style={{borderColor:"#ef4444", color:"#ef4444"}}>SİL</button>
+          )}
           <button className="btn-save" onClick={saveQual} disabled={status==="saving"}>{status==="saving"?"KAYDEDİLİYOR…":"KAYDET"}</button>
           {status==="saved" && <span className="sok">✓</span>}
           {status==="error" && <span className="serr">✗ Hata</span>}
@@ -938,34 +862,24 @@ function MatchScouting({ api, onSaved }) {
       {/* RED Alliance */}
       <div className="alliance-block">
         <div className="alliance-header red">
-          🔴 RED ALLIANCE
-          <span className="alliance-overall red">Overall: {redOverall}</span>
+          🔴 RED ALLIANCE <span className="alliance-overall red">Overall: {redOverall}</span>
         </div>
         <div className="match-grid">
           {[1,2,3].map(s => {
             const r = getRobot("red", s);
             return (
-              <div key={s} className="match-robot">
-                <div className="match-robot-label" style={{color:"#fca5a5"}}>
-                  RED {s}
-                  <select className="team-select red-sel" value={r.team_number||""}
-                    onChange={e=>setRobot("red",s,"team_number",e.target.value)}
-                    style={{marginLeft:8,flex:1}}>
-                    <option value="">— Team —</option>
-                    {TEAMS.map(t=><option key={t.team} value={t.team}>#{t.team} {t.name}</option>)}
-                  </select>
-                </div>
-                <div className="match-fields">
-                  {[["auto_climb","Auto Climb"],["auto_score","Auto Score"],["teleop_score","Teleop Score"],["teleop_climb","Teleop Climb"]].map(([field,label])=>(
-                    <div className="match-field" key={field}>
-                      <label>{label}</label>
-                      <NumInput value={r[field]||""} onChange={v=>setRobot("red",s,field,v)} />
-                    </div>
-                  ))}
-                  <div className="match-notes">
-                    <label style={{fontSize:10,fontWeight:600,letterSpacing:1,textTransform:"uppercase",color:"var(--muted)",display:"block",marginBottom:4}}>Notes</label>
-                    <textarea value={r.notes||""} onChange={e=>setRobot("red",s,"notes",e.target.value)} placeholder="Not…" />
-                  </div>
+              <div key={`red-${s}`} className="match-robot">
+                <div className="match-robot-label">ROBOT {s} <span>RED SLOT</span></div>
+                <select className="team-select red-sel" value={r.team_number||""} onChange={e=>updateRobot("red",s,"team_number",parseInt(e.target.value))}>
+                  <option value="">Takım Seç…</option>
+                  {TEAMS.map(t=><option key={t.team} value={t.team}>{t.team} - {t.name}</option>)}
+                </select>
+                <div className="match-fields" style={{marginTop:12}}>
+                  <div className="match-field"><label>Auto S.</label><NumInput value={r.auto_score} onChange={v=>updateRobot("red",s,"auto_score",v)} /></div>
+                  <div className="match-field"><label>Auto C.</label><NumInput value={r.auto_climb} onChange={v=>updateRobot("red",s,"auto_climb",v)} /></div>
+                  <div className="match-field"><label>Tele S.</label><NumInput value={r.teleop_score} onChange={v=>updateRobot("red",s,"teleop_score",v)} /></div>
+                  <div className="match-field"><label>Tele C.</label><NumInput value={r.teleop_climb} onChange={v=>updateRobot("red",s,"teleop_climb",v)} /></div>
+                  <div className="match-notes"><textarea value={r.notes} onChange={e=>updateRobot("red",s,"notes",e.target.value)} placeholder="Notlar…" /></div>
                 </div>
               </div>
             );
@@ -973,39 +887,27 @@ function MatchScouting({ api, onSaved }) {
         </div>
       </div>
 
-      <div style={{height:12}} />
-
       {/* BLUE Alliance */}
       <div className="alliance-block">
         <div className="alliance-header blue">
-          🔵 BLUE ALLIANCE
-          <span className="alliance-overall blue">Overall: {blueOverall}</span>
+          🔵 BLUE ALLIANCE <span className="alliance-overall blue">Overall: {blueOverall}</span>
         </div>
         <div className="match-grid">
           {[1,2,3].map(s => {
             const r = getRobot("blue", s);
             return (
-              <div key={s} className="match-robot">
-                <div className="match-robot-label" style={{color:"#93c5fd"}}>
-                  BLUE {s}
-                  <select className="team-select blue-sel" value={r.team_number||""}
-                    onChange={e=>setRobot("blue",s,"team_number",e.target.value)}
-                    style={{marginLeft:8,flex:1}}>
-                    <option value="">— Team —</option>
-                    {TEAMS.map(t=><option key={t.team} value={t.team}>#{t.team} {t.name}</option>)}
-                  </select>
-                </div>
-                <div className="match-fields">
-                  {[["auto_climb","Auto Climb"],["auto_score","Auto Score"],["teleop_score","Teleop Score"],["teleop_climb","Teleop Climb"]].map(([field,label])=>(
-                    <div className="match-field" key={field}>
-                      <label>{label}</label>
-                      <NumInput value={r[field]||""} onChange={v=>setRobot("blue",s,field,v)} />
-                    </div>
-                  ))}
-                  <div className="match-notes">
-                    <label style={{fontSize:10,fontWeight:600,letterSpacing:1,textTransform:"uppercase",color:"var(--muted)",display:"block",marginBottom:4}}>Notes</label>
-                    <textarea value={r.notes||""} onChange={e=>setRobot("blue",s,"notes",e.target.value)} placeholder="Not…" />
-                  </div>
+              <div key={`blue-${s}`} className="match-robot">
+                <div className="match-robot-label">ROBOT {s} <span>BLUE SLOT</span></div>
+                <select className="team-select blue-sel" value={r.team_number||""} onChange={e=>updateRobot("blue",s,"team_number",parseInt(e.target.value))}>
+                  <option value="">Takım Seç…</option>
+                  {TEAMS.map(t=><option key={t.team} value={t.team}>{t.team} - {t.name}</option>)}
+                </select>
+                <div className="match-fields" style={{marginTop:12}}>
+                  <div className="match-field"><label>Auto S.</label><NumInput value={r.auto_score} onChange={v=>updateRobot("blue",s,"auto_score",v)} /></div>
+                  <div className="match-field"><label>Auto C.</label><NumInput value={r.auto_climb} onChange={v=>updateRobot("blue",s,"auto_climb",v)} /></div>
+                  <div className="match-field"><label>Tele S.</label><NumInput value={r.teleop_score} onChange={v=>updateRobot("blue",s,"teleop_score",v)} /></div>
+                  <div className="match-field"><label>Tele C.</label><NumInput value={r.teleop_climb} onChange={v=>updateRobot("blue",s,"teleop_climb",v)} /></div>
+                  <div className="match-notes"><textarea value={r.notes} onChange={e=>updateRobot("blue",s,"notes",e.target.value)} placeholder="Notlar…" /></div>
                 </div>
               </div>
             );
@@ -1017,29 +919,45 @@ function MatchScouting({ api, onSaved }) {
 }
 
 // ── Dashboard ─────────────────────────────────────────────────────────────
-function Dashboard({ api, refreshKey }) {
+
+function Dashboard({ api, rk }) {
   const [data, setData] = useState([]);
+  const [sort, setSort] = useState("perf");
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("team");
 
   useEffect(() => {
-    api("/scouting?select=*").then(r=>r.json()).then(d=>setData(d||[])).catch(()=>{});
-  }, [refreshKey, api]);
+    api("/scouting?select=*").then(r=>r.json()).then(d=>{
+      if (Array.isArray(d)) setData(d);
+    }).catch(()=>{});
+  }, [api, rk]);
 
-  const scoutedNums = new Set(data.map(d=>d.team_number));
-  const rows = TEAMS.map(t=>({...t,...(data.find(d=>d.team_number===t.team)||{}),scouted:scoutedNums.has(t.team)}));
-  const filtered = rows.filter(r=>r.name.toLowerCase().includes(search.toLowerCase())||String(r.team).includes(search));
-  const sorted = [...filtered].sort((a,b)=>{
-    if(sort==="team") return a.team-b.team;
-    if(sort==="pit")  return a.pit-b.pit;
-    if(sort==="perf") return totalPitScore(b)-totalPitScore(a);
-    return 0;
+  const scoutedMap = Object.fromEntries(data.map(r => [r.team_number, r]));
+  const teamsWithScout = TEAMS.map(t => ({
+    ...t,
+    ...(scoutedMap[t.team] || {}),
+    scouted: !!scoutedMap[t.team],
+    pitScore: scoutedMap[t.team] ? totalPitScore(scoutedMap[t.team]) : -1,
+  }));
+
+  const filtered = teamsWithScout.filter(t => 
+    t.name.toLowerCase().includes(search.toLowerCase()) || 
+    t.team.toString().includes(search)
+  );
+
+  const sorted = [...filtered].sort((a,b) => {
+    if (sort === "team") return a.team - b.team;
+    if (sort === "pit")  return a.pit  - b.pit;
+    return b.pitScore - a.pitScore;
   });
+
+  const avgPerf = data.length ? (data.reduce((s,r)=>s+(PERF_SCORE[r.performance]||0),0)/data.length).toFixed(1) : 0;
+  const avgScor = data.length ? (data.reduce((s,r)=>s+(SCORE_SCORE[r.scoring]||0),0)/data.length).toFixed(1) : 0;
 
   return (
     <div>
-      <div className="sbar">
-        {[["Total Teams",TEAMS.length],["Scouted",scoutedNums.size],["Remaining",TEAMS.length-scoutedNums.size],["Coverage",Math.round(scoutedNums.size/TEAMS.length*100)+"%"]].map(([l,v])=>(
+      <div className="ph"><h2>Pit Dashboard</h2><p>Toplanan tüm pit verilerini karşılaştır ve analiz et</p></div>
+      <div className="stats-grid">
+        {[["Scouted Teams",data.length],["Avg Performance",avgPerf],["Avg Scoring",avgScor],["Total Teams",TEAMS.length]].map(([l,v])=>(
           <div className="sc" key={l}><div className="scn">{v}</div><div className="scl">{l}</div></div>
         ))}
       </div>
@@ -1061,8 +979,8 @@ function Dashboard({ api, refreshKey }) {
                 <td><Pill label={r.performance}/></td><td><Pill label={r.scoring}/></td>
                 <td><Pill label={r.shooter_type}/></td><td><Pill label={r.intake_type}/></td>
                 <td><Pill label={r.climb}/></td><td><Pill label={r.capacity}/></td>
-                <td style={{color:"var(--muted)",maxWidth:140,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}} title={r.notes}>{r.notes||"—"}</td>
-              </> : <td colSpan={7} style={{color:"var(--muted)",fontSize:12,fontStyle:"italic"}}>Henüz scouted değil</td>}
+                <td style={{color:"var(--muted)",maxWidth:140,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}} title={r.notes}>{r.notes}</td>
+              </> : <td colSpan={7} style={{color:"var(--muted)", fontStyle:"italic", fontSize:11}}>Henüz taranmadı</td>}
             </tr>
           ))}
         </tbody>
@@ -1072,106 +990,74 @@ function Dashboard({ api, refreshKey }) {
 }
 
 // ── Rankings ──────────────────────────────────────────────────────────────
-function Rankings({ api, refreshKey }) {
+
+function Rankings({ api }) {
   const [data, setData] = useState([]);
-  const [matchData, setMatchData] = useState([]);
-  const [view, setView] = useState("pit");
-  const [error, setError] = useState(null);
+  const [mdata, setMdata] = useState([]);
 
   useEffect(() => {
-    if (!api) return;
-    setError(null);
     Promise.all([
-      api("/scouting?select=*").then(r=>r.json()).catch(()=>[]),
-      api("/match_scouting?select=*").then(r=>r.json()).catch(()=>[]),
-    ]).then(([pit, match]) => {
-      setData(Array.isArray(pit) ? pit : []);
-      setMatchData(Array.isArray(match) ? match : []);
-    }).catch(e => setError(String(e)));
-  }, [refreshKey]);
+      api("/scouting?select=*"),
+      api("/match_scouting?select=*")
+    ]).then(async ([r1, r2]) => {
+      const d1 = await r1.json();
+      const d2 = await r2.json();
+      if (Array.isArray(d1)) setData(d1);
+      if (Array.isArray(d2)) setMdata(d2);
+    }).catch(()=>{});
+  }, [api]);
 
-  if (error) return (
-    <div className="nodata">
-      <p style={{fontSize:16,marginBottom:6,color:"#f87171"}}>Hata oluştu</p>
-      <span style={{fontSize:13}}>{error}</span>
-    </div>
-  );
-
-  const pitRanked = data.map(r => {
-    const t = TEAMS.find(x => x.team === r.team_number) || {};
-    return {
-      ...r,
-      team_name: r.team_name || t.name || `Team ${r.team_number}`,
-      pit: t.pit,
-      score: totalPitScore(r),
-    };
-  }).sort((a, b) => b.score - a.score);
-
-  const teamMatchScores = {};
-  matchData.forEach(r => {
-    if (!r.team_number) return;
-    if (!teamMatchScores[r.team_number]) teamMatchScores[r.team_number] = { total:0, count:0 };
-    const s = (parseFloat(r.auto_climb)||0)+(parseFloat(r.auto_score)||0)+(parseFloat(r.teleop_score)||0)+(parseFloat(r.teleop_climb)||0);
-    teamMatchScores[r.team_number].total += s;
-    teamMatchScores[r.team_number].count += 1;
+  const teamStats = TEAMS.map(t => {
+    const scout = data.find(s => s.team_number === t.team);
+    const matches = mdata.filter(m => m.team_number === t.team);
+    const pitScore = scout ? totalPitScore(scout) : 0;
+    const matchScore = matches.length ? matches.reduce((s,m) => s + (parseFloat(m.auto_score)||0)+(parseFloat(m.auto_climb)||0)+(parseFloat(m.teleop_score)||0)+(parseFloat(m.teleop_climb)||0), 0) / matches.length : 0;
+    return { ...t, scout, pitScore, matchScore, total: (pitScore * 2) + (matchScore * 5) };
   });
-  const matchRanked = Object.entries(teamMatchScores).map(([tn, s]) => {
-    const t = TEAMS.find(x => x.team === parseInt(tn)) || {};
-    return { team_number:parseInt(tn), team_name:t.name||`Team ${tn}`, pit:t.pit, avg:s.total/s.count, total:s.total, count:s.count };
-  }).sort((a, b) => b.avg - a.avg);
 
-  const ranked = view === "pit" ? pitRanked : matchRanked;
-  const max = view === "pit" ? (pitRanked[0]?.score || 1) : (matchRanked[0]?.avg || 1);
+  const sorted = teamStats.sort((a,b) => b.total - a.total);
+  const max = sorted[0]?.total || 1;
 
   return (
     <div>
-      <div className="ph">
-        <h2>Rankings</h2>
-        <div style={{display:"flex",gap:8,marginTop:10}}>
-          {[["pit","Pit Scouting"],["match","Match Avg"]].map(([k,l])=>(
-            <button key={k} className={`sbtn ${view===k?"on":""}`} onClick={()=>setView(k)}>{l}</button>
-          ))}
-        </div>
-      </div>
-      {ranked.length === 0 ? (
-        <div className="nodata">
-          <p style={{fontSize:16,marginBottom:6}}>Veri yok</p>
-          <span style={{fontSize:13}}>Önce scouting yap</span>
-        </div>
-      ) : (
-        <div className="rlist">
-          {ranked.map((r, i) => {
-            const g = i===0?"g1":i===1?"g2":i===2?"g3":"";
-            const score = view==="pit" ? r.score : r.avg;
-            const scoreLabel = view==="pit" ? `${r.score}/16` : `${(r.avg||0).toFixed(1)} avg`;
-            return (
-              <div key={r.team_number} className={`rcard ${g}`}>
-                <div className={`rpos ${g}`}>{i+1}</div>
-                <div className="rinfo">
-                  <div className="rn">{r.team_name}</div>
-                  <div className="rm">#{r.team_number}{r.pit ? ` · Pit ${r.pit}` : ""}{view==="match" ? ` · ${r.count} maç` : ""}</div>
-                  {view==="pit" && (
-                    <div className="rpills">
-                      <Pill label={r.performance}/>
-                      <Pill label={r.scoring}/>
-                      {r.climb && r.climb!=="None" && <Pill label={`Climb: ${r.climb}`}/>}
-                    </div>
-                  )}
-                </div>
+      <div className="ph"><h2>Team Rankings</h2><p>Pit ve Maç verilerinin ağırlıklı ortalamasına göre sıralama</p></div>
+      <div className="rgrid">
+        {sorted.map((r,i) => {
+          const score = r.total;
+          return (
+            <div className="rcard" key={r.team}>
+              <div className="rheader">
+                <div className="rnum">#{i+1}</div>
+                <div className="rname">{r.name}</div>
+                <div className="rnum">{r.team}</div>
+              </div>
+              <div className="rbody">
+                {r.scout && (
+                  <div className="rpills">
+                    <Pill label={r.scout.performance}/>
+                    <Pill label={r.scout.scoring}/>
+                    {r.scout.climb && r.scout.climb!=="None" && <Pill label={`Climb: ${r.scout.climb}`}/>}
+                  </div>
+                )}
                 <div className="rbar">
                   <div className="btrack"><div className="bfill" style={{width:`${(score/max)*100}%`}}/></div>
-                  <div className="rval">{scoreLabel}</div>
+                  <div className="bval"><span>POWER SCORE</span><span>{score.toFixed(1)}</span></div>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between",marginTop:14,fontSize:10,fontWeight:700,color:"var(--muted)"}}>
+                  <div>PIT: {r.pitScore.toFixed(1)}</div>
+                  <div>MATCH AVG: {r.matchScore.toFixed(1)}</div>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
 
 // ── Root ──────────────────────────────────────────────────────────────────
+
 export default function App() {
   const [creds, setCreds]   = useState(null);
   const [authed, setAuthed] = useState(false);
@@ -1188,16 +1074,16 @@ export default function App() {
       <nav className="nav">
         <div className="nbrand"><TorchersLogo size={32}/><TorchersText height={18} color="#dc2626" /></div>
         {[["pit","Pit Scout"],["match","Match Scout"],["dashboard","Dashboard"],["rankings","Rankings"]].map(([k,l])=>(
-          <button key={k} className={`ntab ${tab===k?"on":""}`} onClick={()=>setTab(k)}>{l}</button>
+          <button key={k} className={`ntab ${tab===k?"on":"""}`} onClick={()=>setTab(k)}>{l}</button>
         ))}
         <div className="nsp"/>
         <button className="nlock" onClick={()=>setAuthed(false)}>Kilitle</button>
       </nav>
       <div className="main">
         {tab==="pit"       && <ScoutForm     api={api} supabaseUrl={creds.url} supabaseKey={creds.key} onSaved={()=>setRk(k=>k+1)} />}
-        {tab==="match"     && <MatchScouting api={api} onSaved={()=>setRk(k=>k+1)} />}
-        {tab==="dashboard" && <Dashboard     api={api} refreshKey={rk} />}
-        {tab==="rankings"  && <Rankings      api={api} refreshKey={rk} />}
+        {tab==="match"     && <MatchScout     api={api} onSaved={()=>setRk(k=>k+1)} />}
+        {tab==="dashboard" && <Dashboard     api={api} rk={rk} />}
+        {tab==="rankings"  && <Rankings      api={api} />}
       </div>
     </div>
   );
