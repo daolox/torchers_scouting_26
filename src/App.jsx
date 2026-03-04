@@ -5,11 +5,11 @@ import { useState, useEffect, useCallback } from "react";
 const SUPABASE_URL = "https://czplcdhhzehxqfbxkito.supabase.co";       // e.g. https://xxxx.supabase.co
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6cGxjZGhoemVoeHFmYnhraXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2MjU2MDgsImV4cCI6MjA4ODIwMTYwOH0.hzXDcccXtj4UuI8JZRQQR03xhgyjOvSJlFBm348JYAM";      // from Project Settings → API
 
-const TEAM_PASSWORD = "torchers2026";
+const TEAM_PASSWORD = "torchers2026filik";
 
 const TEAMS = [
   { no:1,  pit:2,  team:4817,  name:"One Degree North",           from:"Singapore" },
-  { no:2,  pit:31, team:4972,  name:"BORUSAN ROBOTICS",           from:"Türkiye" },
+  { no:2,  pit:31, team:4972,  name:"BORUSAN ROBOTICS",           from:"Istanbul" },
   { no:3,  pit:14, team:5665,  name:"FENERBAHÇE DOGUS SPARC",     from:"Istanbul" },
   { no:4,  pit:3,  team:6232,  name:"Florya Bisons",              from:"Istanbul" },
   { no:5,  pit:5,  team:6415,  name:"Gultepe Robotics 6415",      from:"Istanbul" },
@@ -55,16 +55,16 @@ const TEAMS = [
   { no:45, pit:17, team:11404, name:"The Power of Skopje",        from:"Macedonia" },
 ];
 
-const PERF_OPTS    = ["Perfect","Good","Average","Poor","DNQ"];
-const SCORE_OPTS   = ["Excellent","Good","Average","Poor","None"];
-const SHOOTER_OPTS = ["High Goal","Low Goal","Both","None"];
-const INTAKE_OPTS  = ["Ground","Human Player","Both","None"];
-const CLIMB_OPTS   = ["High","Mid","Low","None"];
-const CAP_OPTS     = ["High (5+)","Medium (3-4)","Low (1-2)","None"];
+const PERF_OPTS    = ["Perfect","Good","Average","Poor","NG"];
+const SCORE_OPTS   = ["Moving","FixedPlace","FixedPlaceVP"];
+const SHOOTER_OPTS = ["360 Turret","Fixed Turret","Kitbot","Fixed Shooter"];
+const INTAKE_OPTS  = ["Over Bumper","Under Bumper","Both"];
+const CLIMB_OPTS   = ["L1 Middle","L1 Side","L2 Middle","L2 Side","L3 Middle","L3 Side"];
+const CAP_OPTS     = ["Insane (30+)","High (21-30)","Medium (11-20)","Low (5-10)","None"];
 const BLANK = { performance:"", scoring:"", shooter_type:"", intake_type:"", climb:"", capacity:"", notes:"" };
 
-const PERF_SCORE  = { Perfect:5, Good:4, Average:3, Poor:1, DNQ:0 };
-const SCORE_SCORE = { Excellent:5, Good:4, Average:3, Poor:1, None:0 };
+const PERF_SCORE  = { Perfect:5, Good:4, Average:3, Poor:1, NG:0 };
+const SCORE_SCORE = { Moving:5, FixedPlace:2, FixedPlaceVP:3};
 const CLIMB_SCORE = { High:3, Mid:2, Low:1, None:0 };
 function totalScore(r) {
   return (PERF_SCORE[r.performance]||0)*2 + (SCORE_SCORE[r.scoring]||0)*2 + (CLIMB_SCORE[r.climb]||0);
